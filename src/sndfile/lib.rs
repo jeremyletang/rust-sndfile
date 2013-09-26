@@ -1,3 +1,13 @@
+/*!
+* Libsndfile is a library designed to allow the reading and writing of many different sampled sound file formats
+* (such as MS Windows WAV and the Apple/SGI AIFF format) through one standard library interface.
+*
+* During read and write operations, formats are seamlessly converted between the format the application 
+* program has requested or supplied and the file's data format. The application programmer can remain blissfully 
+* unaware of issues such as file endian-ness and data format
+*/
+
+
 #[link(name = "sndfile",
        vers = "0.0.1",
        author = "letang.jeremy@gmail.com",
@@ -36,11 +46,12 @@ pub struct SndInfo {
     seekable : i32
 }
 
-pub struct FormatInfo
-{   format : i32,
-    name : ~str,
-    extension : ~str
-}
+// /// Struct containing informations about format of the current file.
+// pub struct FormatInfo
+// {   format : i32,
+//     name : ~str,
+//     extension : ~str
+// }
 
 /// Modes availables for the open function.
 ///
