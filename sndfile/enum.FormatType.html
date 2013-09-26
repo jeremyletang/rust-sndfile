@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>sndfile::FormatType - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../sndfile/main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='index.html'>sndfile</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.SndFile.html'>SndFile</a><br/><a class='struct ' href='struct.SndInfo.html'>SndInfo</a><br/></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.Error.html'>Error</a><br/><a class='enum current' href='enum.FormatType.html'>FormatType</a><br/><a class='enum ' href='enum.OpenMode.html'>OpenMode</a><br/><a class='enum ' href='enum.SeekMode.html'>SeekMode</a><br/><a class='enum ' href='enum.StringSoundType.html'>StringSoundType</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <input class="search-input" name="search"
+                   autocomplete="off" />
+            <button class="do-search">Search</button>
+        </form>
+    </nav>
+
+    <section class="content enum"><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>FormatType</a></h1><pre class='enum'>pub enum FormatType {
+    <a name='variant.FormatWav'>FormatWav</a>,
+    <a name='variant.FormatAiff'>FormatAiff</a>,
+    <a name='variant.FormatAu'>FormatAu</a>,
+    <a name='variant.FormatRaw'>FormatRaw</a>,
+    <a name='variant.FormatPaf'>FormatPaf</a>,
+    <a name='variant.FormatSvx'>FormatSvx</a>,
+    <a name='variant.FormatNist'>FormatNist</a>,
+    <a name='variant.FormatVoc'>FormatVoc</a>,
+    <a name='variant.FormatIrcam'>FormatIrcam</a>,
+    <a name='variant.FormatW64'>FormatW64</a>,
+    <a name='variant.FormatMat4'>FormatMat4</a>,
+    <a name='variant.FormatMat5'>FormatMat5</a>,
+    <a name='variant.FormatPvf'>FormatPvf</a>,
+    <a name='variant.FormatXi'>FormatXi</a>,
+    <a name='variant.FormatHtk'>FormatHtk</a>,
+    <a name='variant.FormatSds'>FormatSds</a>,
+    <a name='variant.FormatAvr'>FormatAvr</a>,
+    <a name='variant.FormatWavex'>FormatWavex</a>,
+    <a name='variant.FormatSd2'>FormatSd2</a>,
+    <a name='variant.FormatFlac'>FormatFlac</a>,
+    <a name='variant.FormatCaf'>FormatCaf</a>,
+    <a name='variant.FormatWve'>FormatWve</a>,
+    <a name='variant.FormatOgg'>FormatOgg</a>,
+    <a name='variant.FormatMpc2k'>FormatMpc2k</a>,
+    <a name='variant.FormatRf64'>FormatRf64</a>,
+    <a name='variant.FormatPcmS8'>FormatPcmS8</a>,
+    <a name='variant.FormatPcm16'>FormatPcm16</a>,
+    <a name='variant.FormatPcm24'>FormatPcm24</a>,
+    <a name='variant.FormatPcm32'>FormatPcm32</a>,
+    <a name='variant.FormatPcmU8'>FormatPcmU8</a>,
+    <a name='variant.FormatFloat'>FormatFloat</a>,
+    <a name='variant.FormatDouble'>FormatDouble</a>,
+    <a name='variant.FormatUlaw'>FormatUlaw</a>,
+    <a name='variant.FormatAlaw'>FormatAlaw</a>,
+    <a name='variant.FormatImaAdpcm'>FormatImaAdpcm</a>,
+    <a name='variant.FormatApcm'>FormatApcm</a>,
+    <a name='variant.FormatGsm610'>FormatGsm610</a>,
+    <a name='variant.FormatVoxAdpcm'>FormatVoxAdpcm</a>,
+    <a name='variant.FormatG72132'>FormatG72132</a>,
+    <a name='variant.FormatG72324'>FormatG72324</a>,
+    <a name='variant.FormatG72340'>FormatG72340</a>,
+    <a name='variant.FormatDww12'>FormatDww12</a>,
+    <a name='variant.FormatDww16'>FormatDww16</a>,
+    <a name='variant.FormatDww24'>FormatDww24</a>,
+    <a name='variant.FormatDwwN'>FormatDwwN</a>,
+    <a name='variant.FormatDpcm8'>FormatDpcm8</a>,
+    <a name='variant.FormatDpcm16'>FormatDpcm16</a>,
+    <a name='variant.FormatVorbis'>FormatVorbis</a>,
+    <a name='variant.EndianFile'>EndianFile</a>,
+    <a name='variant.EndianLittle'>EndianLittle</a>,
+    <a name='variant.EndianBig'>EndianBig</a>,
+    <a name='variant.EndianCpu'>EndianCpu</a>,
+    <a name='variant.FormatSubMask'>FormatSubMask</a>,
+    <a name='variant.FormatTypeMask'>FormatTypeMask</a>,
+}</pre><div class='docblock'><p>Enum who contains the list of the supported audio format</p>
+
+<ul>
+<li>FormatWav - Microsoft WAV format (little endian)</li>
+<li>FormatAiff - Apple/SGI AIFF format (big endian)</li>
+<li>FormatAu - Sun/NeXT AU format (big endian)</li>
+<li>FormatRaw - RAW PCM data</li>
+<li>FormatPaf - Ensoniq PARIS file format</li>
+<li>FormatSvx - Amiga IFF / SVX8 / SV16 format</li>
+<li>FormatNist - Sphere NIST format</li>
+<li>FormatVoc - VOC files</li>
+<li>FormatIrcam - Berkeley/IRCAM/CARL</li>
+<li>FormatW64 - Sonic Foundry&#39;s 64 bit RIFF/WAV</li>
+<li>FormatMat4 - Matlab (tm) V4.2 / GNU Octave 2.0</li>
+<li>FormatMat5 - Matlab (tm) V5.0 / GNU Octave 2.1</li>
+<li>FormatPvf - Portable Voice Format</li>
+<li>FormatXi - Fasttracker 2 Extended Instrument</li>
+<li>FormatHtk - HMM Tool Kit format</li>
+<li>FormatSds - Midi Sample Dump Standard</li>
+<li>FormatAvr - Audio Visual Research</li>
+<li>FormatWavex - MS WAVE with WAVEFORMATEX</li>
+<li>FormatSd2 - Sound Designer 2</li>
+<li>FormatFlac - FLAC lossless file format</li>
+<li>FormatCaf - Core Audio File format</li>
+<li>FormatWve - Psion WVE format</li>
+<li>FormatOgg - Xiph OGG container</li>
+<li>FormatMpc2k - Akai MPC 2000 sampler</li>
+<li>FormatRf64 - RF64 WAV file</li>
+<li>FormatPcmS8 - Signed 8 bit data</li>
+<li>FormatPcm16 - Signed 16 bit data</li>
+<li>FormatPcm24 - Signed 24 bit data</li>
+<li>FormatPcm32 - Signed 32 bit data</li>
+<li>FormatPcmU8 - Unsigned 8 bit data (WAV and RAW only)</li>
+<li>FormatFloat - 32 bit float data</li>
+<li>FormatDouble - 64 bit float data</li>
+<li>FormatUlaw - U-Law encoded</li>
+<li>FormatAlaw - A-Law encoded</li>
+<li>FormatImaAdpcm - IMA ADPCM</li>
+<li>FormatApcm - Microsoft ADPCM</li>
+<li>FormatGsm610 - GSM 6.10 encoding</li>
+<li>FormatVoxAdpcm - Oki Dialogic ADPCM encoding</li>
+<li>FormatG72132 - 32kbs G721 ADPCM encoding</li>
+<li>FormatG72324 - 24kbs G723 ADPCM encoding</li>
+<li>FormatG72340 - 40kbs G723 ADPCM encoding</li>
+<li>FormatDww12 - 12 bit Delta Width Variable Word encoding</li>
+<li>FormatDww16 - 16 bit Delta Width Variable Word encoding</li>
+<li>FormatDww24 - 24 bit Delta Width Variable Word encoding</li>
+<li>FormatDwwN - N bit Delta Width Variable Word encoding</li>
+<li>FormatDpcm8 - 8 bit differential PCM (XI only)</li>
+<li>FormatDpcm16 - 16 bit differential PCM (XI only)</li>
+<li>FormatVorbis - Xiph Vorbis encoding</li>
+<li>EndianFile - Default file endian-ness</li>
+<li>EndianLittle - Force little endian-ness</li>
+<li>EndianBig - Force big endian-ness</li>
+<li>EndianCpu - Force CPU endian-ness</li>
+</ul>
+</div></section>
+
+    <section class="footer"></section>
+
+    <script>
+        var rootPath = "../";
+    </script>
+    <script src="../sndfile/jquery.js"></script>
+    <script src="../sndfile/search-index.js"></script>
+    <script src="../sndfile/main.js"></script>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+</body>
+</html>

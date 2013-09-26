@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>sndfile::SndFile - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../sndfile/main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='index.html'>sndfile</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.SndFile.html'>SndFile</a><br/><a class='struct ' href='struct.SndInfo.html'>SndInfo</a><br/></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.Error.html'>Error</a><br/><a class='enum ' href='enum.FormatType.html'>FormatType</a><br/><a class='enum ' href='enum.OpenMode.html'>OpenMode</a><br/><a class='enum ' href='enum.SeekMode.html'>SeekMode</a><br/><a class='enum ' href='enum.StringSoundType.html'>StringSoundType</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <input class="search-input" name="search"
+                   autocomplete="off" />
+            <button class="do-search">Search</button>
+        </form>
+    </nav>
+
+    <section class="content struct"><h1 class='fqn'>Struct <a href='index.html'>sndfile</a>::<a class='struct' href=''>SndFile</a></h1><pre class='struct'>pub struct SndFile {
+    priv handle: *SNDFILE,
+    priv info: ~<a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a>,
+}</pre><div class='docblock'><p>SndFile object, used to load/store sound from a file path or an fd.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='struct.SndFile.html' title='sndfile::SndFile'>SndFile</a></code></h3><div class='methods'><h4 id='fn.new' class='method'><code>fn <span class='fnname'>new</span>(path: ~str, mode: <a class='enum' href='enum.OpenMode.html' title='sndfile::OpenMode'>OpenMode</a>) -&gt; std::result::Result</code></h4>
+<div class='docblock'><p>Construct SndFile object with the path to the music and a mode to open it.</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>path - The path to load the music</li>
+<li>mode - The mode to open the music</li>
+</ul>
+
+<p>Return Ok() containing the SndFile on success, a string representation of the error otherwise.</p>
+</div><h4 id='fn.new_with_fd' class='method'><code>fn <span class='fnname'>new_with_fd</span>(fd: i32, mode: <a class='enum' href='enum.OpenMode.html' title='sndfile::OpenMode'>OpenMode</a>, close_desc: bool) -&gt; std::result::Result</code></h4>
+<div class='docblock'><p>Construct SndFile object with the fd of the file containing the music and a mode to open it.</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>fd - The fd to load the music</li>
+<li>mode - The mode to open the music</li>
+<li>close_desc - Should SndFile close the fd at exit?</li>
+</ul>
+
+<p>Return Ok() containing the SndFile on success, a string representation of the error otherwise.</p>
+</div><h4 id='fn.get_sndinfo' class='method'><code>fn <span class='fnname'>get_sndinfo</span>(&amp;self) -&gt; ~<a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h4>
+<div class='docblock'><p>Return the SndInfo struct of the current music.</p>
+</div><h4 id='fn.get_string' class='method'><code>fn <span class='fnname'>get_string</span>(&amp;self, string_type: <a class='enum' href='enum.StringSoundType.html' title='sndfile::StringSoundType'>StringSoundType</a>) -&gt; std::option::Option</code></h4>
+<div class='docblock'><p>Retrieve a tag contained by the music.</p>
+
+<h1>Argument</h1>
+
+<ul>
+<li>string_type - The type of the tag to retrieve</li>
+</ul>
+
+<p>Return Some() ~str if the tag is found, None otherwise.</p>
+</div><h4 id='fn.set_string' class='method'><code>fn <span class='fnname'>set_string</span>(&amp;mut self, string_type: <a class='enum' href='enum.StringSoundType.html' title='sndfile::StringSoundType'>StringSoundType</a>, string: ~str) -&gt; <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
+<div class='docblock'><p>Set a tag on the music file.</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>string_type - The type of the tag to set</li>
+<li>string - The string to set.</li>
+</ul>
+
+<p>Return NoError on success, an other error code otherwise</p>
+</div><h4 id='fn.check_format' class='method'><code>fn <span class='fnname'>check_format</span>&lt;'r&gt;(info: &amp;'r <a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a>) -&gt; bool</code></h4>
+<div class='docblock'><p>Check if the format of the SndInfo struct is valid.</p>
+
+<h1>Argument</h1>
+
+<ul>
+<li>info - The SndInfo struct to test </li>
+</ul>
+
+<p>Return true if the struct is valid, false otherwise.</p>
+</div><h4 id='fn.close' class='method'><code>fn <span class='fnname'>close</span>(&amp;self) -&gt; <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
+<div class='docblock'><p>Close the SndFile object.</p>
+
+<p>This function must be called before the exist of the program to destroy all the resources.</p>
+
+<p>Return NoError if destruction success, an other error code otherwise.</p>
+</div><h4 id='fn.write_sync' class='method'><code>fn <span class='fnname'>write_sync</span>(&amp;mut self)</code></h4>
+<div class='docblock'><p>If the file is opened Write or ReadWrite, call the operating system&#39;s function
+to force the writing of all file cache buffers to disk. If the file is opened Read no action is taken.
+If the file is opened Read no action is taken.</p>
+</div><h4 id='fn.seek' class='method'><code>fn <span class='fnname'>seek</span>(&amp;mut self, frames: i64, whence: <a class='enum' href='enum.SeekMode.html' title='sndfile::SeekMode'>SeekMode</a>) -&gt; i64</code></h4>
+<h4 id='fn.read_i16' class='method'><code>fn <span class='fnname'>read_i16</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i16], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read items of type i16</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of items.</p>
+</div><h4 id='fn.read_i32' class='method'><code>fn <span class='fnname'>read_i32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i32], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read items of type i32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of items.</p>
+</div><h4 id='fn.read_f32' class='method'><code>fn <span class='fnname'>read_f32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f32], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read items of type f32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of items.</p>
+</div><h4 id='fn.read_f64' class='method'><code>fn <span class='fnname'>read_f64</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f64], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read items of type f64</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of items.</p>
+</div><h4 id='fn.readf_i16' class='method'><code>fn <span class='fnname'>readf_i16</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i16], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read frames of type i16</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of frames.</p>
+</div><h4 id='fn.readf_i32' class='method'><code>fn <span class='fnname'>readf_i32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i32], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read frames of type i32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of frames.</p>
+</div><h4 id='fn.readf_f32' class='method'><code>fn <span class='fnname'>readf_f32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f32], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read frames of type f32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of frames.</p>
+</div><h4 id='fn.readf_f64' class='method'><code>fn <span class='fnname'>readf_f64</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f64], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Read frames of type f64</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
+</ul>
+
+<p>Return the count of frames.</p>
+</div><h4 id='fn.write_i16' class='method'><code>fn <span class='fnname'>write_i16</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i16], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write items of type i16</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
+</ul>
+
+<p>Return the count of wrote items.</p>
+</div><h4 id='fn.write_i32' class='method'><code>fn <span class='fnname'>write_i32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i32], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write items of type i32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
+</ul>
+
+<p>Return the count of wrote items.</p>
+</div><h4 id='fn.write_f32' class='method'><code>fn <span class='fnname'>write_f32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f32], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write items of type f32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
+</ul>
+
+<p>Return the count of wrote items.</p>
+</div><h4 id='fn.write_f64' class='method'><code>fn <span class='fnname'>write_f64</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f64], items: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write items of type f64</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
+</ul>
+
+<p>Return the count of wrote items.</p>
+</div><h4 id='fn.writef_i16' class='method'><code>fn <span class='fnname'>writef_i16</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i16], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write frames of type i16</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
+</ul>
+
+<p>Return the count of wrote frames.</p>
+</div><h4 id='fn.writef_i32' class='method'><code>fn <span class='fnname'>writef_i32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i32], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write frames of type i32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
+</ul>
+
+<p>Return the count of wrote frames.</p>
+</div><h4 id='fn.writef_f32' class='method'><code>fn <span class='fnname'>writef_f32</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f32], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write frames of type f32</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
+</ul>
+
+<p>Return the count of wrote frames.</p>
+</div><h4 id='fn.writef_f64' class='method'><code>fn <span class='fnname'>writef_f64</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [f64], frames: i64) -&gt; i64</code></h4>
+<div class='docblock'><p>Write frames of type f64</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
+</ul>
+
+<p>Return the count of wrote frames.</p>
+</div><h4 id='fn.error' class='method'><code>fn <span class='fnname'>error</span>(&amp;self) -&gt; <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
+<div class='docblock'><p>Get the last error</p>
+
+<p>Return the last error as a variant of the enum Error.</p>
+</div><h4 id='fn.string_error' class='method'><code>fn <span class='fnname'>string_error</span>(&amp;self) -&gt; ~str</code></h4>
+<div class='docblock'><p>Get the last error as a string</p>
+
+<p>Return an owned str containing the last error.</p>
+</div><h4 id='fn.error_number' class='method'><code>fn <span class='fnname'>error_number</span>(error_num: <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a>) -&gt; ~str</code></h4>
+<div class='docblock'><p>Get an error as a string from a variant of enum Error</p>
+
+<p>Return an owned str containing the error.</p>
+</div></div></section>
+
+    <section class="footer"></section>
+
+    <script>
+        var rootPath = "../";
+    </script>
+    <script src="../sndfile/jquery.js"></script>
+    <script src="../sndfile/search-index.js"></script>
+    <script src="../sndfile/main.js"></script>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+</body>
+</html>
