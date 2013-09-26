@@ -1,0 +1,7 @@
+/doc/
+/lib/
+/bin/
+*.dylib
+/.rust
+/build/
+/.DS_Store
