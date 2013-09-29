@@ -33,7 +33,8 @@
         </form>
     </nav>
 
-    <section class="content enum"><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>FormatType</a></h1><pre class='enum'>pub enum FormatType {
+    <section id='main' class="content enum"><a class='source'
+                       href='../src/sndfile/src/sndfile/lib.rs.html#156'>[src]</a><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>FormatType</a></h1><pre class='enum'>pub enum FormatType {
     <a name='variant.FormatWav'>FormatWav</a>,
     <a name='variant.FormatAiff'>FormatAiff</a>,
     <a name='variant.FormatAu'>FormatAu</a>,
@@ -91,60 +92,61 @@
 }</pre><div class='docblock'><p>Enum who contains the list of the supported audio format</p>
 
 <ul>
-<li>FormatWav - Microsoft WAV format (little endian)</li>
-<li>FormatAiff - Apple/SGI AIFF format (big endian)</li>
-<li>FormatAu - Sun/NeXT AU format (big endian)</li>
-<li>FormatRaw - RAW PCM data</li>
-<li>FormatPaf - Ensoniq PARIS file format</li>
-<li>FormatSvx - Amiga IFF / SVX8 / SV16 format</li>
-<li>FormatNist - Sphere NIST format</li>
-<li>FormatVoc - VOC files</li>
-<li>FormatIrcam - Berkeley/IRCAM/CARL</li>
-<li>FormatW64 - Sonic Foundry&#39;s 64 bit RIFF/WAV</li>
-<li>FormatMat4 - Matlab (tm) V4.2 / GNU Octave 2.0</li>
-<li>FormatMat5 - Matlab (tm) V5.0 / GNU Octave 2.1</li>
-<li>FormatPvf - Portable Voice Format</li>
-<li>FormatXi - Fasttracker 2 Extended Instrument</li>
-<li>FormatHtk - HMM Tool Kit format</li>
-<li>FormatSds - Midi Sample Dump Standard</li>
-<li>FormatAvr - Audio Visual Research</li>
-<li>FormatWavex - MS WAVE with WAVEFORMATEX</li>
-<li>FormatSd2 - Sound Designer 2</li>
-<li>FormatFlac - FLAC lossless file format</li>
-<li>FormatCaf - Core Audio File format</li>
-<li>FormatWve - Psion WVE format</li>
-<li>FormatOgg - Xiph OGG container</li>
-<li>FormatMpc2k - Akai MPC 2000 sampler</li>
-<li>FormatRf64 - RF64 WAV file</li>
-<li>FormatPcmS8 - Signed 8 bit data</li>
-<li>FormatPcm16 - Signed 16 bit data</li>
-<li>FormatPcm24 - Signed 24 bit data</li>
-<li>FormatPcm32 - Signed 32 bit data</li>
-<li>FormatPcmU8 - Unsigned 8 bit data (WAV and RAW only)</li>
-<li>FormatFloat - 32 bit float data</li>
-<li>FormatDouble - 64 bit float data</li>
-<li>FormatUlaw - U-Law encoded</li>
-<li>FormatAlaw - A-Law encoded</li>
-<li>FormatImaAdpcm - IMA ADPCM</li>
-<li>FormatApcm - Microsoft ADPCM</li>
-<li>FormatGsm610 - GSM 6.10 encoding</li>
-<li>FormatVoxAdpcm - Oki Dialogic ADPCM encoding</li>
-<li>FormatG72132 - 32kbs G721 ADPCM encoding</li>
-<li>FormatG72324 - 24kbs G723 ADPCM encoding</li>
-<li>FormatG72340 - 40kbs G723 ADPCM encoding</li>
-<li>FormatDww12 - 12 bit Delta Width Variable Word encoding</li>
-<li>FormatDww16 - 16 bit Delta Width Variable Word encoding</li>
-<li>FormatDww24 - 24 bit Delta Width Variable Word encoding</li>
-<li>FormatDwwN - N bit Delta Width Variable Word encoding</li>
-<li>FormatDpcm8 - 8 bit differential PCM (XI only)</li>
-<li>FormatDpcm16 - 16 bit differential PCM (XI only)</li>
-<li>FormatVorbis - Xiph Vorbis encoding</li>
-<li>EndianFile - Default file endian-ness</li>
-<li>EndianLittle - Force little endian-ness</li>
-<li>EndianBig - Force big endian-ness</li>
-<li>EndianCpu - Force CPU endian-ness</li>
+<li><code>FormatWav</code> - Microsoft WAV format (little endian)</li>
+<li><code>FormatAiff</code> - Apple/SGI AIFF format (big endian)</li>
+<li><code>FormatAu</code> - Sun/NeXT AU format (big endian)</li>
+<li><code>FormatRaw</code> - RAW PCM data</li>
+<li><code>FormatPaf</code> - Ensoniq PARIS file format</li>
+<li><code>FormatSvx</code> - Amiga IFF / SVX8 / SV16 format</li>
+<li><code>FormatNist</code> - Sphere NIST format</li>
+<li><code>FormatVoc</code> - VOC files</li>
+<li><code>FormatIrcam</code> - Berkeley/IRCAM/CARL</li>
+<li><code>FormatW64</code> - Sonic Foundry&#39;s 64 bit RIFF/WAV</li>
+<li><code>FormatMat4</code> - Matlab (tm) V4.2 / GNU Octave 2.0</li>
+<li><code>FormatMat5</code> - Matlab (tm) V5.0 / GNU Octave 2.1</li>
+<li><code>FormatPvf</code> - Portable Voice Format</li>
+<li><code>FormatXi</code> - Fasttracker 2 Extended Instrument</li>
+<li><code>FormatHtk</code> - HMM Tool Kit format</li>
+<li><code>FormatSds</code> - Midi Sample Dump Standard</li>
+<li><code>FormatAvr</code> - Audio Visual Research</li>
+<li><code>FormatWavex</code> - MS WAVE with WAVEFORMATEX</li>
+<li><code>FormatSd2</code> - Sound Designer 2</li>
+<li><code>FormatFlac</code> - FLAC lossless file format</li>
+<li><code>FormatCaf</code> - Core Audio File format</li>
+<li><code>FormatWve</code> - Psion WVE format</li>
+<li><code>FormatOgg</code> - Xiph OGG container</li>
+<li><code>FormatMpc2k</code> - Akai MPC 2000 sampler</li>
+<li><code>FormatRf64</code> - RF64 WAV file</li>
+<li><code>FormatPcmS8</code> - Signed 8 bit data</li>
+<li><code>FormatPcm16</code> - Signed 16 bit data</li>
+<li><code>FormatPcm24</code> - Signed 24 bit data</li>
+<li><code>FormatPcm32</code> - Signed 32 bit data</li>
+<li><code>FormatPcmU8</code> - Unsigned 8 bit data (WAV and RAW only)</li>
+<li><code>FormatFloat</code> - 32 bit float data</li>
+<li><code>FormatDouble</code> - 64 bit float data</li>
+<li><code>FormatUlaw</code> - U-Law encoded</li>
+<li><code>FormatAlaw</code> - A-Law encoded</li>
+<li><code>FormatImaAdpcm</code> - IMA ADPCM</li>
+<li><code>FormatApcm</code> - Microsoft ADPCM</li>
+<li><code>FormatGsm610</code> - GSM 6.10 encoding</li>
+<li><code>FormatVoxAdpcm</code> - Oki Dialogic ADPCM encoding</li>
+<li><code>FormatG72132</code> - 32kbs G721 ADPCM encoding</li>
+<li><code>FormatG72324</code> - 24kbs G723 ADPCM encoding</li>
+<li><code>FormatG72340</code> - 40kbs G723 ADPCM encoding</li>
+<li><code>FormatDww12</code> - 12 bit Delta Width Variable Word encoding</li>
+<li><code>FormatDww16</code> - 16 bit Delta Width Variable Word encoding</li>
+<li><code>FormatDww24</code> - 24 bit Delta Width Variable Word encoding</li>
+<li><code>FormatDwwN</code> - N bit Delta Width Variable Word encoding</li>
+<li><code>FormatDpcm8</code> - 8 bit differential PCM (XI only)</li>
+<li><code>FormatDpcm16</code> - 16 bit differential PCM (XI only)</li>
+<li><code>FormatVorbis</code> - Xiph Vorbis encoding</li>
+<li><code>EndianFile</code> - Default file endian-ness</li>
+<li><code>EndianLittle</code> - Force little endian-ness</li>
+<li><code>EndianBig</code> - Force big endian-ness</li>
+<li><code>EndianCpu</code> - Force CPU endian-ness</li>
 </ul>
 </div></section>
+    <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
