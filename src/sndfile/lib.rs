@@ -7,6 +7,7 @@
 * unaware of issues such as file endian-ness and data format
 */
 
+#[feature(globs)];
 
 #[link(name = "sndfile",
        vers = "0.0.1",
