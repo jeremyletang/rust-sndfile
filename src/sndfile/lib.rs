@@ -61,7 +61,7 @@ mod ffi;
 
 /// The SndInfo structure is for passing data between the calling 
 /// function and the library when opening a file for reading or writing.
-#[deriving(Clone)]
+#[deriving(Clone, Eq, Ord, ToStr)]
 pub struct SndInfo {
     /// The number of frames
     frames : i64,
@@ -78,6 +78,7 @@ pub struct SndInfo {
 }
 
 /// Modes availables for the open function.
+#[deriving(Clone, Eq, Ord, ToStr)]
 pub enum OpenMode {
     /// Read only mode
     Read    = ffi::SFM_READ as i32,
@@ -88,6 +89,7 @@ pub enum OpenMode {
 }
 
 /// Type of strings available for method get_string()
+#[deriving(Clone, Eq, Ord, ToStr)]
 pub enum StringSoundType {
     /// Get the title of the audio content
     Title       = ffi::SF_STR_TITLE as i32,
@@ -113,6 +115,7 @@ pub enum StringSoundType {
 
 /// Types of error who can be return by API functions
 #[repr(C)]
+#[deriving(Clone, Eq, Ord, ToStr)]
 pub enum Error {
     /// No Error
     NoError             = ffi::SF_ERR_NO_ERROR as i32,
@@ -128,6 +131,7 @@ pub enum Error {
 
 
 /// Enum to set the offset with method seek
+#[deriving(Clone, Eq, Ord, ToStr)]
 pub enum SeekMode {
     /// The offset is set to the start of the audio data plus offset (multichannel) frames.
     SeekSet = ffi::SEEK_SET as i32,
@@ -138,6 +142,7 @@ pub enum SeekMode {
 }
 
 /// Enum who contains the list of the supported audio format
+#[deriving(Clone, Eq, Ord, ToStr)]
 pub enum FormatType {
     /// Microsoft WAV format (little endian)
     FormatWav = ffi::SF_FORMAT_WAV as i32,
