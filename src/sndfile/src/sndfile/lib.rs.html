@@ -726,6 +726,26 @@
 <span id='692'>692</span>
 <span id='693'>693</span>
 <span id='694'>694</span>
+<span id='695'>695</span>
+<span id='696'>696</span>
+<span id='697'>697</span>
+<span id='698'>698</span>
+<span id='699'>699</span>
+<span id='700'>700</span>
+<span id='701'>701</span>
+<span id='702'>702</span>
+<span id='703'>703</span>
+<span id='704'>704</span>
+<span id='705'>705</span>
+<span id='706'>706</span>
+<span id='707'>707</span>
+<span id='708'>708</span>
+<span id='709'>709</span>
+<span id='710'>710</span>
+<span id='711'>711</span>
+<span id='712'>712</span>
+<span id='713'>713</span>
+<span id='714'>714</span>
 </pre><pre class='rust'>// The MIT License (MIT)
 // 
 // Copyright (c) 2013 Jeremy Letang (letang.jeremy@gmail.com)
@@ -748,12 +768,32 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /*!
-* Libsndfile is a library designed to allow the reading and writing of many different sampled sound file formats
-* (such as MS Windows WAV and the Apple/SGI AIFF format) through one standard library interface.
-*
-* During read and write operations, formats are seamlessly converted between the format the application 
-* program has requested or supplied and the file&#39;s data format. The application programmer can remain blissfully 
-* unaware of issues such as file endian-ness and data format
+# rust-sndfile
+
+__Libsndfile__ bindings and wrappers for Rust.
+
+__Libsndfile__ is a library for reading and writing files containing sampled sound through one standard library interface.
+
+website: [libsndfile](http://www.mega-nerd.com/libsndfile).
+
+Libsndfile is a library designed to allow the reading and writing of many different sampled sound file formats
+(such as MS Windows WAV and the Apple/SGI AIFF format) through one standard library interface.
+
+During read and write operations, formats are seamlessly converted between the format the application 
+program has requested or supplied and the file&#39;s data format. The application programmer can remain blissfully 
+unaware of issues such as file endian-ness and data format
+
+# Installation
+
+You must install __libsndfile__ to build the binding. You can download it directly from the [website](http://www.mega-nerd.com/libsndfile/#Download),
+or with your favorite package management tool.
+
+Then clone the __rust-sndfile__ repository and build it with rustpkg:
+
+```Shell
+rustpkg build sndfile
+```
+
 */
 
 #[feature(globs)];
