@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
-        things
+        things.
     </div>
     <![endif]-->
 
@@ -34,14 +33,20 @@
     </nav>
 
     <section id='main' class="content enum"><a class='source'
-                       href='../src/sndfile/src/sndfile/lib.rs.html#82'>[src]</a><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>Error</a></h1><pre class='enum'>pub enum Error {
-    <a name='variant.NoError'>NoError</a>,
-    <a name='variant.UnrecognizedFormat'>UnrecognizedFormat</a>,
-    <a name='variant.SystemError'>SystemError</a>,
-    <a name='variant.MalformedFile'>MalformedFile</a>,
-    <a name='variant.UnsupportedEncoding'>UnsupportedEncoding</a>,
+                       href='../src/sndfile/src/sndfile/lib.rs.html#116-127'>[src]</a><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>Error</a></h1><pre class='enum'>pub enum Error {
+    NoError,
+    UnrecognizedFormat,
+    SystemError,
+    MalformedFile,
+    UnsupportedEncoding,
 }</pre><div class='docblock'><p>Types of error who can be return by API functions</p>
-</div></section>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.NoError'><code>NoError</code></td><td><div class='docblock'><p>No Error</p>
+</div></td></tr><tr><td id='variant.UnrecognizedFormat'><code>UnrecognizedFormat</code></td><td><div class='docblock'><p>The file format is not recognized</p>
+</div></td></tr><tr><td id='variant.SystemError'><code>SystemError</code></td><td><div class='docblock'><p>There is an internal system error</p>
+</div></td></tr><tr><td id='variant.MalformedFile'><code>MalformedFile</code></td><td><div class='docblock'><p>The file is malformed</p>
+</div></td></tr><tr><td id='variant.UnsupportedEncoding'><code>UnsupportedEncoding</code></td><td><div class='docblock'><p>The encoding of the file is not supported by sndfile</p>
+</div></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

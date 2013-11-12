@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
-        things
+        things.
     </div>
     <![endif]-->
 
@@ -34,16 +33,24 @@
     </nav>
 
     <section id='main' class="content struct"><a class='source'
-                       href='../src/sndfile/src/sndfile/lib.rs.html#40'>[src]</a><h1 class='fqn'>Struct <a href='index.html'>sndfile</a>::<a class='struct' href=''>SndInfo</a></h1><pre class='struct'>pub struct SndInfo {
-    <a name='structfield.frames'>frames</a>: i64,
-    <a name='structfield.samplerate'>samplerate</a>: i32,
-    <a name='structfield.channels'>channels</a>: i32,
-    <a name='structfield.format'>format</a>: i32,
-    <a name='structfield.sections'>sections</a>: i32,
-    <a name='structfield.seekable'>seekable</a>: i32,
+                       href='../src/sndfile/src/sndfile/lib.rs.html#65-78'>[src]</a><h1 class='fqn'>Struct <a href='index.html'>sndfile</a>::<a class='struct' href=''>SndInfo</a></h1><pre class='struct'>pub struct SndInfo {
+    frames: i64,
+    samplerate: i32,
+    channels: i32,
+    format: i32,
+    sections: i32,
+    seekable: i32,
 }</pre><div class='docblock'><p>The SndInfo structure is for passing data between the calling
 function and the library when opening a file for reading or writing.</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl Clone for <a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h3><div class='methods'><h4 id='method.clone' class='method'><code>fn <span class='fnname'>clone</span>(&amp;self) -&gt; <a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h4>
+</div><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.frames'><code>frames</code></td><td><div class='docblock'><p>The number of frames</p>
+</div></td></tr><tr><td id='structfield.samplerate'><code>samplerate</code></td><td><div class='docblock'><p>The sample rate</p>
+</div></td></tr><tr><td id='structfield.channels'><code>channels</code></td><td><div class='docblock'><p>The number of channels</p>
+</div></td></tr><tr><td id='structfield.format'><code>format</code></td><td><div class='docblock'><p>The format from enum FormatType</p>
+</div></td></tr><tr><td id='structfield.sections'><code>sections</code></td><td><div class='docblock'><p>The sections</p>
+</div></td></tr><tr><td id='structfield.seekable'><code>seekable</code></td><td><div class='docblock'><p>Is the file seekable</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/clone/trait.Clone.html' title='std::clone::Clone'>Clone</a> for <a class='struct' href='../sndfile/struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h3><div class='docblock'><p>Automatically derived.</p>
+</div><div class='methods'><h4 id='method.clone' class='method'><code>fn <span class='fnname'>clone</span>(&amp;self) -&gt; <a class='struct' href='../sndfile/struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

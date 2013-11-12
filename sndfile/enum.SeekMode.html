@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
-        things
+        things.
     </div>
     <![endif]-->
 
@@ -34,18 +33,16 @@
     </nav>
 
     <section id='main' class="content enum"><a class='source'
-                       href='../src/sndfile/src/sndfile/lib.rs.html#96'>[src]</a><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>SeekMode</a></h1><pre class='enum'>pub enum SeekMode {
-    <a name='variant.SeekSet'>SeekSet</a>,
-    <a name='variant.SeekCur'>SeekCur</a>,
-    <a name='variant.SeekEnd'>SeekEnd</a>,
+                       href='../src/sndfile/src/sndfile/lib.rs.html#131-138'>[src]</a><h1 class='fqn'>Enum <a href='index.html'>sndfile</a>::<a class='enum' href=''>SeekMode</a></h1><pre class='enum'>pub enum SeekMode {
+    SeekSet,
+    SeekCur,
+    SeekEnd,
 }</pre><div class='docblock'><p>Enum to set the offset with method seek</p>
-
-<ul>
-<li><code>SeekSet</code> - The offset is set to the start of the audio data plus offset (multichannel) frames.</li>
-<li><code>SeekCur</code> - The offset is set to its current location plus offset (multichannel) frames.</li>
-<li><code>SeekEnd</code> - The offset is set to the end of the data plus offset (multichannel) frames.</li>
-</ul>
-</div></section>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.SeekSet'><code>SeekSet</code></td><td><div class='docblock'><p>The offset is set to the start of the audio data plus offset (multichannel) frames.</p>
+</div></td></tr><tr><td id='variant.SeekCur'><code>SeekCur</code></td><td><div class='docblock'><p>The offset is set to its current location plus offset (multichannel) frames.</p>
+</div></td></tr><tr><td id='variant.SeekEnd'><code>SeekEnd</code></td><td><div class='docblock'><p>The offset is set to the end of the data plus offset (multichannel) frames.</p>
+</div></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

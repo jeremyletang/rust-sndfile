@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
-        things
+        things.
     </div>
     <![endif]-->
 
@@ -34,67 +33,67 @@
     </nav>
 
     <section id='main' class="content struct"><a class='source'
-                       href='../src/sndfile/src/sndfile/lib.rs.html#214'>[src]</a><h1 class='fqn'>Struct <a href='index.html'>sndfile</a>::<a class='struct' href=''>SndFile</a></h1><pre class='struct'>pub struct SndFile {
-    priv <a name='structfield.handle'>handle</a>: *SNDFILE,
-    priv <a name='structfield.info'>info</a>: ~<a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a>,
+                       href='../src/sndfile/src/sndfile/lib.rs.html#253-256'>[src]</a><h1 class='fqn'>Struct <a href='index.html'>sndfile</a>::<a class='struct' href=''>SndFile</a></h1><pre class='struct'>pub struct SndFile {
+    // some fields omitted
 }</pre><div class='docblock'><p>SndFile object, used to load/store sound from a file path or an fd.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='struct.SndFile.html' title='sndfile::SndFile'>SndFile</a></code></h3><div class='methods'><h4 id='method.new' class='method'><code>fn <span class='fnname'>new</span>(path: ~str, mode: <a class='enum' href='enum.OpenMode.html' title='sndfile::OpenMode'>OpenMode</a>) -&gt; Result&lt;<a class='struct' href='struct.SndFile.html' title='sndfile::SndFile'>SndFile</a>, ~str&gt;</code></h4>
+</div><h2 class='fields'>Fields</h2>
+<table></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../sndfile/struct.SndFile.html' title='sndfile::SndFile'>SndFile</a></code></h3><div class='methods'><h4 id='method.new' class='method'><code>fn <span class='fnname'>new</span>(path: &amp;str, mode: <a class='enum' href='../sndfile/enum.OpenMode.html' title='sndfile::OpenMode'>OpenMode</a>) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/result/enum.Result.html' title='std::result::Result'>Result</a>&lt;<a class='struct' href='../sndfile/struct.SndFile.html' title='sndfile::SndFile'>SndFile</a>, ~str&gt;</code></h4>
 <div class='docblock'><p>Construct SndFile object with the path to the music and a mode to open it.</p>
 
 <h1>Arguments</h1>
 
 <ul>
-<li><code>path</code> - The path to load the music</li>
-<li><code>mode</code> - The mode to open the music</li>
+<li>path - The path to load the music</li>
+<li>mode - The mode to open the music</li>
 </ul>
 
 <p>Return Ok() containing the SndFile on success, a string representation of the error otherwise.</p>
-</div><h4 id='method.new_with_fd' class='method'><code>fn <span class='fnname'>new_with_fd</span>(fd: i32, mode: <a class='enum' href='enum.OpenMode.html' title='sndfile::OpenMode'>OpenMode</a>, close_desc: bool) -&gt; Result&lt;<a class='struct' href='struct.SndFile.html' title='sndfile::SndFile'>SndFile</a>, ~str&gt;</code></h4>
+</div><h4 id='method.new_with_fd' class='method'><code>fn <span class='fnname'>new_with_fd</span>(fd: i32, mode: <a class='enum' href='../sndfile/enum.OpenMode.html' title='sndfile::OpenMode'>OpenMode</a>, close_desc: bool) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/result/enum.Result.html' title='std::result::Result'>Result</a>&lt;<a class='struct' href='../sndfile/struct.SndFile.html' title='sndfile::SndFile'>SndFile</a>, ~str&gt;</code></h4>
 <div class='docblock'><p>Construct SndFile object with the fd of the file containing the music and a mode to open it.</p>
 
 <h1>Arguments</h1>
 
 <ul>
-<li><code>fd</code> - The fd to load the music</li>
-<li><code>mode</code> - The mode to open the music</li>
-<li><code>close_desc</code> - Should SndFile close the fd at exit?</li>
+<li>fd - The fd to load the music</li>
+<li>mode - The mode to open the music</li>
+<li>close_desc - Should SndFile close the fd at exit?</li>
 </ul>
 
 <p>Return Ok() containing the SndFile on success, a string representation of the error otherwise.</p>
-</div><h4 id='method.get_sndinfo' class='method'><code>fn <span class='fnname'>get_sndinfo</span>(&amp;self) -&gt; ~<a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h4>
+</div><h4 id='method.get_sndinfo' class='method'><code>fn <span class='fnname'>get_sndinfo</span>(&amp;self) -&gt; <a class='struct' href='../sndfile/struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a></code></h4>
 <div class='docblock'><p>Return the SndInfo struct of the current music.</p>
-</div><h4 id='method.get_string' class='method'><code>fn <span class='fnname'>get_string</span>(&amp;self, string_type: <a class='enum' href='enum.StringSoundType.html' title='sndfile::StringSoundType'>StringSoundType</a>) -&gt; Option&lt;~str&gt;</code></h4>
+</div><h4 id='method.get_string' class='method'><code>fn <span class='fnname'>get_string</span>(&amp;self, string_type: <a class='enum' href='../sndfile/enum.StringSoundType.html' title='sndfile::StringSoundType'>StringSoundType</a>) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;</code></h4>
 <div class='docblock'><p>Retrieve a tag contained by the music.</p>
 
 <h1>Argument</h1>
 
 <ul>
-<li><code>string_type</code> - The type of the tag to retrieve</li>
+<li>string_type - The type of the tag to retrieve</li>
 </ul>
 
 <p>Return Some() ~str if the tag is found, None otherwise.</p>
-</div><h4 id='method.set_string' class='method'><code>fn <span class='fnname'>set_string</span>(&amp;mut self, string_type: <a class='enum' href='enum.StringSoundType.html' title='sndfile::StringSoundType'>StringSoundType</a>, string: ~str) -&gt; <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
+</div><h4 id='method.set_string' class='method'><code>fn <span class='fnname'>set_string</span>(&amp;mut self, string_type: <a class='enum' href='../sndfile/enum.StringSoundType.html' title='sndfile::StringSoundType'>StringSoundType</a>, string: ~str) -&gt; <a class='enum' href='../sndfile/enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
 <div class='docblock'><p>Set a tag on the music file.</p>
 
 <h1>Arguments</h1>
 
 <ul>
-<li><code>string_type</code> - The type of the tag to set</li>
-<li><code>string</code> - The string to set.</li>
+<li>string_type - The type of the tag to set</li>
+<li>string - The string to set.</li>
 </ul>
 
 <p>Return NoError on success, an other error code otherwise</p>
-</div><h4 id='method.check_format' class='method'><code>fn <span class='fnname'>check_format</span>&lt;'r&gt;(info: &amp;'r <a class='struct' href='struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a>) -&gt; bool</code></h4>
+</div><h4 id='method.check_format' class='method'><code>fn <span class='fnname'>check_format</span>&lt;'r&gt;(info: &amp;'r <a class='struct' href='../sndfile/struct.SndInfo.html' title='sndfile::SndInfo'>SndInfo</a>) -&gt; bool</code></h4>
 <div class='docblock'><p>Check if the format of the SndInfo struct is valid.</p>
 
 <h1>Argument</h1>
 
 <ul>
-<li><code>info</code> - The SndInfo struct to test </li>
+<li>info - The SndInfo struct to test </li>
 </ul>
 
 <p>Return true if the struct is valid, false otherwise.</p>
-</div><h4 id='method.close' class='method'><code>fn <span class='fnname'>close</span>(&amp;self) -&gt; <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
+</div><h4 id='method.close' class='method'><code>fn <span class='fnname'>close</span>(&amp;self) -&gt; <a class='enum' href='../sndfile/enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
 <div class='docblock'><p>Close the SndFile object.</p>
 
 <p>This function must be called before the exist of the program to destroy all the resources.</p>
@@ -104,15 +103,25 @@
 <div class='docblock'><p>If the file is opened Write or ReadWrite, call the operating system&#39;s function
 to force the writing of all file cache buffers to disk. If the file is opened Read no action is taken.
 If the file is opened Read no action is taken.</p>
-</div><h4 id='method.seek' class='method'><code>fn <span class='fnname'>seek</span>(&amp;mut self, frames: i64, whence: <a class='enum' href='enum.SeekMode.html' title='sndfile::SeekMode'>SeekMode</a>) -&gt; i64</code></h4>
-<h4 id='method.read_i16' class='method'><code>fn <span class='fnname'>read_i16</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i16], items: i64) -&gt; i64</code></h4>
+</div><h4 id='method.seek' class='method'><code>fn <span class='fnname'>seek</span>(&amp;mut self, frames: i64, whence: <a class='enum' href='../sndfile/enum.SeekMode.html' title='sndfile::SeekMode'>SeekMode</a>) -&gt; i64</code></h4>
+<div class='docblock'><p>Move in the audio file</p>
+
+<p>The non audio data are ignored</p>
+
+<h1>Arguments</h1>
+
+<ul>
+<li>frames - The position to move in frames</li>
+<li>whence - The seek mode from the enum SeekMode</li>
+</ul>
+</div><h4 id='method.read_i16' class='method'><code>fn <span class='fnname'>read_i16</span>&lt;'r&gt;(&amp;'r mut self, array: &amp;'r mut [i16], items: i64) -&gt; i64</code></h4>
 <div class='docblock'><p>Read items of type i16</p>
 
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the items.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of items.</p>
@@ -122,8 +131,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the items.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of items.</p>
@@ -133,8 +142,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the items.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of items.</p>
@@ -144,8 +153,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the items.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the items.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of items.</p>
@@ -155,8 +164,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the frames.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of frames.</p>
@@ -166,8 +175,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the frames.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of frames.</p>
@@ -177,8 +186,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the frames.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of frames.</p>
@@ -188,8 +197,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array to fill with the frames.</li>
-<li><code>items</code> - The max capacity of the array. </li>
+<li>array - The array to fill with the frames.</li>
+<li>items - The max capacity of the array. </li>
 </ul>
 
 <p>Return the count of frames.</p>
@@ -199,8 +208,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of items to write.</li>
-<li><code>items</code> - The number of items to write. </li>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
 </ul>
 
 <p>Return the count of wrote items.</p>
@@ -210,8 +219,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of items to write.</li>
-<li><code>items</code> - The number of items to write. </li>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
 </ul>
 
 <p>Return the count of wrote items.</p>
@@ -221,8 +230,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of items to write.</li>
-<li><code>items</code> - The number of items to write. </li>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
 </ul>
 
 <p>Return the count of wrote items.</p>
@@ -232,8 +241,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of items to write.</li>
-<li><code>items</code> - The number of items to write. </li>
+<li>array - The array of items to write.</li>
+<li>items - The number of items to write. </li>
 </ul>
 
 <p>Return the count of wrote items.</p>
@@ -243,8 +252,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of frames to write.</li>
-<li><code>items</code> - The number of frames to write. </li>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
 </ul>
 
 <p>Return the count of wrote frames.</p>
@@ -254,8 +263,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of frames to write.</li>
-<li><code>items</code> - The number of frames to write. </li>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
 </ul>
 
 <p>Return the count of wrote frames.</p>
@@ -265,8 +274,8 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of frames to write.</li>
-<li><code>items</code> - The number of frames to write. </li>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
 </ul>
 
 <p>Return the count of wrote frames.</p>
@@ -276,12 +285,12 @@ If the file is opened Read no action is taken.</p>
 <h1>Arguments</h1>
 
 <ul>
-<li><code>array</code> - The array of frames to write.</li>
-<li><code>items</code> - The number of frames to write. </li>
+<li>array - The array of frames to write.</li>
+<li>items - The number of frames to write. </li>
 </ul>
 
 <p>Return the count of wrote frames.</p>
-</div><h4 id='method.error' class='method'><code>fn <span class='fnname'>error</span>(&amp;self) -&gt; <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
+</div><h4 id='method.error' class='method'><code>fn <span class='fnname'>error</span>(&amp;self) -&gt; <a class='enum' href='../sndfile/enum.Error.html' title='sndfile::Error'>Error</a></code></h4>
 <div class='docblock'><p>Get the last error</p>
 
 <p>Return the last error as a variant of the enum Error.</p>
@@ -289,11 +298,12 @@ If the file is opened Read no action is taken.</p>
 <div class='docblock'><p>Get the last error as a string</p>
 
 <p>Return an owned str containing the last error.</p>
-</div><h4 id='method.error_number' class='method'><code>fn <span class='fnname'>error_number</span>(error_num: <a class='enum' href='enum.Error.html' title='sndfile::Error'>Error</a>) -&gt; ~str</code></h4>
+</div><h4 id='method.error_number' class='method'><code>fn <span class='fnname'>error_number</span>(error_num: <a class='enum' href='../sndfile/enum.Error.html' title='sndfile::Error'>Error</a>) -&gt; ~str</code></h4>
 <div class='docblock'><p>Get an error as a string from a variant of enum Error</p>
 
 <p>Return an owned str containing the error.</p>
-</div></div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/clone/trait.Clone.html' title='std::clone::Clone'>Clone</a> for <a class='struct' href='../sndfile/struct.SndFile.html' title='sndfile::SndFile'>SndFile</a></code></h3><div class='methods'><h4 id='method.clone' class='method'><code>fn <span class='fnname'>clone</span>(&amp;self) -&gt; <a class='struct' href='../sndfile/struct.SndFile.html' title='sndfile::SndFile'>SndFile</a></code></h4>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
