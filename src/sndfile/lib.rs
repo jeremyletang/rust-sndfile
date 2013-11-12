@@ -1,3 +1,24 @@
+// The MIT License (MIT)
+// 
+// Copyright (c) 2013 Jeremy Letang (letang.jeremy@gmail.com)
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 /*!
 * Libsndfile is a library designed to allow the reading and writing of many different sampled sound file formats
 * (such as MS Windows WAV and the Apple/SGI AIFF format) through one standard library interface.
@@ -10,6 +31,7 @@
 #[feature(globs)];
 
 #[link(name = "sndfile",
+       package_id = "sndfile",
        vers = "0.0.1",
        author = "letang.jeremy@gmail.com",
        uuid = "F8CC5AA5-95DC-449C-B7DD-A6663DAC8E51",
@@ -18,6 +40,8 @@
 #[desc = "Libsndfile binding for sfml"];
 #[license = "GPL/LGPL"];
 #[crate_type = "lib"];
+
+#[warn(missing_doc)];
 
 extern mod extra;
 
@@ -47,13 +71,6 @@ pub struct SndInfo {
     seekable : i32
 }
 
-// /// Struct containing informations about format of the current file.
-// pub struct FormatInfo
-// {   format : i32,
-//     name : ~str,
-//     extension : ~str
-// }
-
 /// Modes availables for the open function.
 ///
 /// * Read - Read only mode
@@ -80,6 +97,7 @@ pub enum StringSoundType {
 }
 
 /// Types of error who can be return by API functions
+#[repr(C)]
 pub enum Error {
     NoError             = ffi::SF_ERR_NO_ERROR as i32,
     UnrecognizedFormat  = ffi::SF_ERR_UNRECOGNISED_FORMAT as i32,
@@ -217,6 +235,15 @@ pub struct SndFile {
     priv info : ~SndInfo
 }
 
+impl Clone for SndFile {
+    fn clone(&self) -> SndFile {
+        SndFile {
+            handle : self.handle,
+            info : self.info.clone()
+        }
+    }
+}
+
 impl SndFile {
     /**
     * Construct SndFile object with the path to the music and a mode to open it.
@@ -227,10 +254,11 @@ impl SndFile {
     *
     * Return Ok() containing the SndFile on success, a string representation of the error otherwise.
     */
-    #[fixed_stack_segment] #[inline(never)]
-    pub fn new(path : ~str, mode : OpenMode) -> Result<SndFile, ~str> {
+    pub fn new(path : &str, mode : OpenMode) -> Result<SndFile, ~str> {
         let info : ~SndInfo = ~SndInfo {frames : 0, samplerate : 0, channels : 0, format : 0, sections : 0, seekable : 0};
-        let tmp_sndfile = unsafe { ffi::sf_open(path.to_c_str().unwrap(), mode as i32, &*info) };
+        let tmp_sndfile = do path.with_c_str |c_path| {
+            unsafe {ffi::sf_open(c_path, mode as i32, &*info) }
+        };
         if tmp_sndfile.is_null() {
             Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::null())) })
         } else {
@@ -251,7 +279,6 @@ impl SndFile {
     * 
     * Return Ok() containing the SndFile on success, a string representation of the error otherwise.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn new_with_fd(fd : i32, mode : OpenMode, close_desc : bool) -> Result<SndFile, ~str> {
         let info : ~SndInfo = ~SndInfo {frames : 0, samplerate : 0, channels : 0, format : 0, sections : 0, seekable : 0};
         let tmp_sndfile = match close_desc {
@@ -271,8 +298,8 @@ impl SndFile {
     /**
     * Return the SndInfo struct of the current music.
     */
-    pub fn get_sndinfo(&self) -> ~SndInfo {
-        self.info.clone()
+    pub fn get_sndinfo(&self) -> SndInfo {
+        *self.info.clone()
     }
 
     /**
@@ -283,7 +310,6 @@ impl SndFile {
     * 
     * Return Some() ~str if the tag is found, None otherwise.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn get_string(&self, string_type : StringSoundType) -> Option<~str> {
         let c_string = unsafe {
             ffi::sf_get_string(self.handle, string_type as i32)
@@ -304,7 +330,6 @@ impl SndFile {
     *
     * Return NoError on success, an other error code otherwise
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn set_string(&mut self, string_type : StringSoundType, string : ~str) -> Error {
         unsafe {
             ffi::sf_set_string(self.handle, string_type as i32, string.to_c_str().unwrap())
@@ -319,7 +344,6 @@ impl SndFile {
     *
     * Return true if the struct is valid, false otherwise.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn check_format<'r>(info : &'r SndInfo) -> bool {
         match unsafe {ffi::sf_format_check(info) } {
             ffi::SF_TRUE    => true,
@@ -336,7 +360,6 @@ impl SndFile {
     *
     * Return NoError if destruction success, an other error code otherwise.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn close(&self) -> Error {
         unsafe {
             ffi::sf_close(self.handle)
@@ -348,14 +371,12 @@ impl SndFile {
     * to force the writing of all file cache buffers to disk. If the file is opened Read no action is taken.
     * If the file is opened Read no action is taken.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn write_sync(&mut self) -> () {
         unsafe {
             ffi::sf_write_sync(self.handle)
         }
     }   
 
-    #[fixed_stack_segment] #[inline(never)]
     pub fn seek(&mut self, frames : i64, whence : SeekMode) -> i64{
         unsafe {
             ffi::sf_seek(self.handle, frames, whence as i32)
@@ -371,7 +392,6 @@ impl SndFile {
     *
     * Return the count of items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn read_i16<'r>(&'r mut self, array : &'r mut [i16], items : i64) -> i64 {
         unsafe {
             ffi::sf_read_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), items)
@@ -387,7 +407,6 @@ impl SndFile {
     *
     * Return the count of items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn read_i32<'r>(&'r mut self, array : &'r mut [i32], items : i64) -> i64 {
         unsafe {
             ffi::sf_read_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), items)
@@ -403,7 +422,6 @@ impl SndFile {
     *
     * Return the count of items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn read_f32<'r>(&'r mut self, array : &'r mut [f32], items : i64) -> i64 {
         unsafe {
             ffi::sf_read_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), items)
@@ -419,7 +437,6 @@ impl SndFile {
     *
     * Return the count of items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn read_f64<'r>(&'r mut self, array : &'r mut [f64], items : i64) -> i64 {
         unsafe {
             ffi::sf_read_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), items)
@@ -435,7 +452,6 @@ impl SndFile {
     *
     * Return the count of frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn readf_i16<'r>(&'r mut self, array : &'r mut [i16], frames : i64) -> i64 {
         unsafe {
             ffi::sf_readf_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), frames)
@@ -451,7 +467,6 @@ impl SndFile {
     *
     * Return the count of frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn readf_i32<'r>(&'r mut self, array : &'r mut [i32], frames : i64) -> i64 {
         unsafe {
             ffi::sf_readf_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), frames)
@@ -467,7 +482,6 @@ impl SndFile {
     *
     * Return the count of frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn readf_f32<'r>(&'r mut self, array : &'r mut [f32], frames : i64) -> i64 {
         unsafe {
             ffi::sf_readf_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), frames)
@@ -483,7 +497,6 @@ impl SndFile {
     *
     * Return the count of frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn readf_f64<'r>(&'r mut self, array : &'r mut [f64], frames : i64) -> i64 {
         unsafe {
             ffi::sf_readf_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), frames)
@@ -499,7 +512,6 @@ impl SndFile {
     *
     * Return the count of wrote items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn write_i16<'r>(&'r mut self, array : &'r mut [i16], items : i64) -> i64 {
         unsafe {
             ffi::sf_write_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), items)
@@ -515,7 +527,6 @@ impl SndFile {
     *
     * Return the count of wrote items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn write_i32<'r>(&'r mut self, array : &'r mut [i32], items : i64) -> i64 {
         unsafe {
             ffi::sf_write_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), items)
@@ -531,7 +542,6 @@ impl SndFile {
     *
     * Return the count of wrote items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn write_f32<'r>(&'r mut self, array : &'r mut [f32], items : i64) -> i64 {
         unsafe {
             ffi::sf_write_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), items)
@@ -547,7 +557,6 @@ impl SndFile {
     *
     * Return the count of wrote items.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn write_f64<'r>(&'r mut self, array : &'r mut [f64], items : i64) -> i64 {
         unsafe {
             ffi::sf_write_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), items)
@@ -563,7 +572,6 @@ impl SndFile {
     *
     * Return the count of wrote frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn writef_i16<'r>(&'r mut self, array : &'r mut [i16], frames : i64) -> i64 {
         unsafe {
             ffi::sf_writef_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), frames)
@@ -579,7 +587,6 @@ impl SndFile {
     *
     * Return the count of wrote frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn writef_i32<'r>(&'r mut self, array : &'r mut [i32], frames : i64) -> i64 {
         unsafe {
             ffi::sf_writef_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), frames)
@@ -595,7 +602,6 @@ impl SndFile {
     *
     * Return the count of wrote frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn writef_f32<'r>(&'r mut self, array : &'r mut [f32], frames : i64) -> i64 {
         unsafe {
             ffi::sf_writef_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), frames)
@@ -611,7 +617,6 @@ impl SndFile {
     *
     * Return the count of wrote frames.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn writef_f64<'r>(&'r mut self, array : &'r mut [f64], frames : i64) -> i64 {
         unsafe {
             ffi::sf_writef_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), frames)
@@ -623,7 +628,6 @@ impl SndFile {
     *
     * Return the last error as a variant of the enum Error.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn error(&self) -> Error {
         unsafe {
             ffi::sf_error(self.handle)
@@ -635,7 +639,6 @@ impl SndFile {
     *
     * Return an owned str containing the last error.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn string_error(&self) -> ~str {
         unsafe {
             str::raw::from_c_str(ffi::sf_strerror(self.handle))
@@ -647,7 +650,6 @@ impl SndFile {
     *
     * Return an owned str containing the error.
     */
-    #[fixed_stack_segment] #[inline(never)]
     pub fn error_number(error_num : Error) -> ~str {
         unsafe {
             str::raw::from_c_str(ffi::sf_error_number(error_num as i32))
