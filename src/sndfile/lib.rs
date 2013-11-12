@@ -20,12 +20,32 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /*!
-* Libsndfile is a library designed to allow the reading and writing of many different sampled sound file formats
-* (such as MS Windows WAV and the Apple/SGI AIFF format) through one standard library interface.
-*
-* During read and write operations, formats are seamlessly converted between the format the application 
-* program has requested or supplied and the file's data format. The application programmer can remain blissfully 
-* unaware of issues such as file endian-ness and data format
+# rust-sndfile
+
+__Libsndfile__ bindings and wrappers for Rust.
+
+__Libsndfile__ is a library for reading and writing files containing sampled sound through one standard library interface.
+
+website: [libsndfile](http://www.mega-nerd.com/libsndfile).
+
+Libsndfile is a library designed to allow the reading and writing of many different sampled sound file formats
+(such as MS Windows WAV and the Apple/SGI AIFF format) through one standard library interface.
+
+During read and write operations, formats are seamlessly converted between the format the application 
+program has requested or supplied and the file's data format. The application programmer can remain blissfully 
+unaware of issues such as file endian-ness and data format
+
+# Installation
+
+You must install __libsndfile__ to build the binding. You can download it directly from the [website](http://www.mega-nerd.com/libsndfile/#Download),
+or with your favorite package management tool.
+
+Then clone the __rust-sndfile__ repository and build it with rustpkg:
+
+```Shell
+rustpkg build sndfile
+```
+
 */
 
 #[feature(globs)];
