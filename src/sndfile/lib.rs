@@ -62,6 +62,7 @@ rustpkg build sndfile
 #[crate_type = "lib"];
 
 #[warn(missing_doc)];
+#[allow(dead_code)];
 
 extern mod extra;
 
