@@ -66,7 +66,7 @@ rustpkg build sndfile
 
 extern mod extra;
 
-use std::{str, ptr, vec};
+use std::{str, ptr};
 
 #[doc(hidden)]
 #[cfg(target_os="macos")]
@@ -449,7 +449,7 @@ impl SndFile {
     */
     pub fn read_i16<'r>(&'r mut self, array : &'r mut [i16], items : i64) -> i64 {
         unsafe {
-            ffi::sf_read_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), items)
+            ffi::sf_read_short(self.handle, array.as_mut_ptr(), items)
         }        
     }
 
@@ -464,7 +464,7 @@ impl SndFile {
     */
     pub fn read_i32<'r>(&'r mut self, array : &'r mut [i32], items : i64) -> i64 {
         unsafe {
-            ffi::sf_read_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), items)
+            ffi::sf_read_int(self.handle, array.as_mut_ptr(), items)
         }        
     }
 
@@ -479,7 +479,7 @@ impl SndFile {
     */
     pub fn read_f32<'r>(&'r mut self, array : &'r mut [f32], items : i64) -> i64 {
         unsafe {
-            ffi::sf_read_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), items)
+            ffi::sf_read_float(self.handle, array.as_mut_ptr(), items)
         }        
     }
 
@@ -494,7 +494,7 @@ impl SndFile {
     */
     pub fn read_f64<'r>(&'r mut self, array : &'r mut [f64], items : i64) -> i64 {
         unsafe {
-            ffi::sf_read_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), items)
+            ffi::sf_read_double(self.handle, array.as_mut_ptr(), items)
         }        
     }
 
@@ -509,7 +509,7 @@ impl SndFile {
     */
     pub fn readf_i16<'r>(&'r mut self, array : &'r mut [i16], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_readf_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), frames)
+            ffi::sf_readf_short(self.handle, array.as_mut_ptr(), frames)
         }        
     }
 
@@ -524,7 +524,7 @@ impl SndFile {
     */
     pub fn readf_i32<'r>(&'r mut self, array : &'r mut [i32], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_readf_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), frames)
+            ffi::sf_readf_int(self.handle, array.as_mut_ptr(), frames)
         }        
     }
 
@@ -539,7 +539,7 @@ impl SndFile {
     */
     pub fn readf_f32<'r>(&'r mut self, array : &'r mut [f32], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_readf_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), frames)
+            ffi::sf_readf_float(self.handle, array.as_mut_ptr(), frames)
         }        
     }
 
@@ -554,7 +554,7 @@ impl SndFile {
     */
     pub fn readf_f64<'r>(&'r mut self, array : &'r mut [f64], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_readf_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), frames)
+            ffi::sf_readf_double(self.handle, array.as_mut_ptr(), frames)
         }        
     }
 
@@ -569,7 +569,7 @@ impl SndFile {
     */
     pub fn write_i16<'r>(&'r mut self, array : &'r mut [i16], items : i64) -> i64 {
         unsafe {
-            ffi::sf_write_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), items)
+            ffi::sf_write_short(self.handle, array.as_mut_ptr(), items)
         }
     }
 
@@ -584,7 +584,7 @@ impl SndFile {
     */
     pub fn write_i32<'r>(&'r mut self, array : &'r mut [i32], items : i64) -> i64 {
         unsafe {
-            ffi::sf_write_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), items)
+            ffi::sf_write_int(self.handle, array.as_mut_ptr(), items)
         }
     }
 
@@ -599,7 +599,7 @@ impl SndFile {
     */
     pub fn write_f32<'r>(&'r mut self, array : &'r mut [f32], items : i64) -> i64 {
         unsafe {
-            ffi::sf_write_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), items)
+            ffi::sf_write_float(self.handle, array.as_mut_ptr(), items)
         }
     }
 
@@ -614,7 +614,7 @@ impl SndFile {
     */
     pub fn write_f64<'r>(&'r mut self, array : &'r mut [f64], items : i64) -> i64 {
         unsafe {
-            ffi::sf_write_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), items)
+            ffi::sf_write_double(self.handle, array.as_mut_ptr(), items)
         }
     }
 
@@ -629,7 +629,7 @@ impl SndFile {
     */
     pub fn writef_i16<'r>(&'r mut self, array : &'r mut [i16], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_writef_short(self.handle, vec::raw::to_mut_ptr::<i16>(array), frames)
+            ffi::sf_writef_short(self.handle, array.as_mut_ptr(), frames)
         }
     }
 
@@ -644,7 +644,7 @@ impl SndFile {
     */
     pub fn writef_i32<'r>(&'r mut self, array : &'r mut [i32], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_writef_int(self.handle, vec::raw::to_mut_ptr::<i32>(array), frames)
+            ffi::sf_writef_int(self.handle, array.as_mut_ptr(), frames)
         }
     }
 
@@ -659,7 +659,7 @@ impl SndFile {
     */
     pub fn writef_f32<'r>(&'r mut self, array : &'r mut [f32], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_writef_float(self.handle, vec::raw::to_mut_ptr::<f32>(array), frames)
+            ffi::sf_writef_float(self.handle, array.as_mut_ptr(), frames)
         }
     }
 
@@ -674,7 +674,7 @@ impl SndFile {
     */
     pub fn writef_f64<'r>(&'r mut self, array : &'r mut [f64], frames : i64) -> i64 {
         unsafe {
-            ffi::sf_writef_double(self.handle, vec::raw::to_mut_ptr::<f64>(array), frames)
+            ffi::sf_writef_double(self.handle, array.as_mut_ptr(), frames)
         }
     }
 
