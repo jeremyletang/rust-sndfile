@@ -50,13 +50,7 @@ rustpkg build sndfile
 
 #[feature(globs)];
 
-#[link(name = "sndfile",
-       package_id = "sndfile",
-       vers = "0.0.1",
-       author = "letang.jeremy@gmail.com",
-       uuid = "F8CC5AA5-95DC-449C-B7DD-A6663DAC8E51",
-       url = "http://https://github.com/JeremyLetang/rust-sndfile")];
-
+#[crate_id = "sndfile#0.1"];
 #[desc = "Libsndfile binding for sfml"];
 #[license = "GPL/LGPL"];
 #[crate_type = "lib"];
