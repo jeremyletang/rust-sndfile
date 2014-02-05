@@ -53,7 +53,8 @@ rustpkg build sndfile
 #[crate_id = "sndfile#0.1"];
 #[desc = "Libsndfile binding for sfml"];
 #[license = "GPL/LGPL"];
-#[crate_type = "lib"];
+#[crate_type = "rlib"];
+#[crate_type = "dylib"];
 
 #[warn(missing_doc)];
 #[allow(dead_code)];
@@ -71,7 +72,6 @@ mod libsndfile {
     extern {}
 }
 
-#[doc(hidden)]
 mod ffi;
 
 /// The SndInfo structure is for passing data between the calling 
@@ -272,7 +272,7 @@ pub enum FormatType {
 /// SndFile object, used to load/store sound from a file path or an fd.
 pub struct SndFile {
     priv handle : *ffi::SNDFILE,
-    priv info : ~SndInfo
+    priv info : SndInfo
 }
 
 impl Clone for SndFile {
@@ -295,9 +295,9 @@ impl SndFile {
     * Return Ok() containing the SndFile on success, a string representation of the error otherwise.
     */
     pub fn new(path : &str, mode : OpenMode) -> Result<SndFile, ~str> {
-        let info : ~SndInfo = ~SndInfo {frames : 0, samplerate : 0, channels : 0, format : 0, sections : 0, seekable : 0};
+        let info : SndInfo = SndInfo {frames : 0, samplerate : 0, channels : 0, format : 0, sections : 0, seekable : 0};
         let tmp_sndfile = path.with_c_str( |c_path| {
-            unsafe {ffi::sf_open(c_path, mode as i32, &*info) }
+            unsafe {ffi::sf_open(c_path, mode as i32, &info) }
         });
         if tmp_sndfile.is_null() {
             Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::null())) })
@@ -320,10 +320,10 @@ impl SndFile {
     * Return Ok() containing the SndFile on success, a string representation of the error otherwise.
     */
     pub fn new_with_fd(fd : i32, mode : OpenMode, close_desc : bool) -> Result<SndFile, ~str> {
-        let info : ~SndInfo = ~SndInfo {frames : 0, samplerate : 0, channels : 0, format : 0, sections : 0, seekable : 0};
+        let info : SndInfo = SndInfo {frames : 0, samplerate : 0, channels : 0, format : 0, sections : 0, seekable : 0};
         let tmp_sndfile = match close_desc {
-            true    => unsafe { ffi::sf_open_fd(fd, mode as i32, &*info, ffi::SF_TRUE) },
-            false   => unsafe { ffi::sf_open_fd(fd, mode as i32, &*info, ffi::SF_FALSE) }
+            true    => unsafe { ffi::sf_open_fd(fd, mode as i32, &info, ffi::SF_TRUE) },
+            false   => unsafe { ffi::sf_open_fd(fd, mode as i32, &info, ffi::SF_FALSE) }
         };
         if tmp_sndfile.is_null() {
             Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::null())) })
@@ -339,7 +339,7 @@ impl SndFile {
     * Return the SndInfo struct of the current music.
     */
     pub fn get_sndinfo(&self) -> SndInfo {
-        *self.info.clone()
+        self.info.clone()
     }
 
     /**
@@ -370,9 +370,11 @@ impl SndFile {
     *
     * Return NoError on success, an other error code otherwise
     */
-    pub fn set_string(&mut self, string_type : StringSoundType, string : ~str) -> Error {
+    pub fn set_string(&mut self, string_type : StringSoundType, string : &str) -> Error {
         unsafe {
-            ffi::sf_set_string(self.handle, string_type as i32, string.to_c_str().unwrap())
+            string.with_c_str(|c_str| {
+                ffi::sf_set_string(self.handle, string_type as i32, c_str)
+            })
         }
     }    
 
