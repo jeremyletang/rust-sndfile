@@ -12,8 +12,4 @@ website: [libsndfile](http://www.mega-nerd.com/libsndfile).
 You must install __libsndfile__ to build the binding. You can download it directly from the [website](http://www.mega-nerd.com/libsndfile/#Download),
 or with your favorite package management tool.
 
-Then clone the __rust-sndfile__ repository and build it with rustpkg:
-
-```Shell
-rustpkg build sndfile
-```
+Then clone the __rust-sndfile__ repository and build it with make.
