@@ -1,17 +1,17 @@
 // The MIT License (MIT)
-// 
+//
 // Copyright (c) 2013 Jeremy Letang (letang.jeremy@gmail.com)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
 // the Software without restriction, including without limitation the rights to
 // use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
 // the Software, and to permit persons to whom the Software is furnished to do so,
 // subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
 // FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -19,7 +19,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#[allow(dead_code, non_camel_case_types)];
+#![allow(dead_code, non_camel_case_types)]
 
 use super::*;
 use std::libc::{c_char, c_void};
@@ -131,7 +131,7 @@ extern "C" {
     pub fn sf_open(path : *c_char, mode : SF_MODE, info : *SndInfo) -> *SNDFILE;
     pub fn sf_open_fd(fd : i32, mode : SF_MODE, info : *SndInfo, close_desc : SF_BOOL) -> *SNDFILE;
     pub fn sf_format_check(info : *SndInfo) -> SF_BOOL;
-    
+
     pub fn sf_seek(sndfile : *SNDFILE, frames : i64, whence : i32) -> i64;
     pub fn sf_command(sndfile : *SNDFILE, cmd : i32, data : *c_void, datasize : i32) -> Error;
 

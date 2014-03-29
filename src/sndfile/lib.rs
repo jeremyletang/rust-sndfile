@@ -52,16 +52,16 @@ rustpkg build sndfile
 
 */
 
-#[feature(globs)];
+#![feature(globs)]
 
-#[crate_id = "sndfile#0.1"];
-#[desc = "Libsndfile binding for sfml"];
-#[license = "GPL/LGPL"];
-#[crate_type = "rlib"];
-#[crate_type = "dylib"];
+#![crate_id = "sndfile#0.1"]
+#![desc = "Libsndfile binding for sfml"]
+#![license = "GPL/LGPL"]
+#![crate_type = "rlib"]
+#![crate_type = "dylib"]
 
-#[warn(missing_doc)];
-#[allow(dead_code)];
+#![warn(missing_doc)]
+#![allow(dead_code)]
 
 use std::{str, ptr};
 
