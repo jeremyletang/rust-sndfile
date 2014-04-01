@@ -81,17 +81,17 @@ mod ffi;
 #[deriving(Clone, Eq, Ord, Show)]
 pub struct SndInfo {
     /// The number of frames
-    frames : i64,
+    pub frames : i64,
     /// The sample rate
-    samplerate : i32,
+    pub samplerate : i32,
     /// The number of channels
-    channels : i32,
+    pub channels : i32,
     /// The format from enum FormatType
-    format : i32,
+    pub format : i32,
     /// The sections
-    sections : i32,
+    pub sections : i32,
     /// Is the file seekable
-    seekable : i32
+    pub seekable : i32
 }
 
 /// Modes availables for the open function.
@@ -273,8 +273,8 @@ pub enum FormatType {
 
 /// SndFile object, used to load/store sound from a file path or an fd.
 pub struct SndFile {
-    priv handle : *ffi::SNDFILE,
-    priv info : SndInfo
+    handle : *ffi::SNDFILE,
+    info : SndInfo
 }
 
 impl Clone for SndFile {
