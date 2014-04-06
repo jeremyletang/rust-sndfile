@@ -59,9 +59,10 @@ rustpkg build sndfile
 #![license = "GPL/LGPL"]
 #![crate_type = "rlib"]
 #![crate_type = "dylib"]
-
 #![warn(missing_doc)]
 #![allow(dead_code)]
+
+extern crate libc;
 
 use std::{str, ptr};
 
