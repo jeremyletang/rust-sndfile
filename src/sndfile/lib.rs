@@ -79,7 +79,7 @@ mod ffi;
 
 /// The SndInfo structure is for passing data between the calling
 /// function and the library when opening a file for reading or writing.
-#[deriving(Clone, Eq, Ord, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub struct SndInfo {
     /// The number of frames
     pub frames : i64,
@@ -96,7 +96,7 @@ pub struct SndInfo {
 }
 
 /// Modes availables for the open function.
-#[deriving(Clone, Eq, Ord, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum OpenMode {
     /// Read only mode
     Read    = ffi::SFM_READ as i32,
@@ -107,7 +107,7 @@ pub enum OpenMode {
 }
 
 /// Type of strings available for method get_string()
-#[deriving(Clone, Eq, Ord, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum StringSoundType {
     /// Get the title of the audio content
     Title       = ffi::SF_STR_TITLE as i32,
@@ -121,7 +121,7 @@ pub enum StringSoundType {
     Comment     = ffi::SF_STR_COMMENT as i32,
     /// Get the date of creation
     Date        = ffi::SF_STR_DATE as i32,
-    /// The name of the album 
+    /// The name of the album
     Album       = ffi::SF_STR_ALBUM as i32,
     /// The licence of the content
     License     = ffi::SF_STR_LICENSE as i32,
@@ -133,7 +133,7 @@ pub enum StringSoundType {
 
 /// Types of error who can be return by API functions
 #[repr(C)]
-#[deriving(Clone, Eq, Ord, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum Error {
     /// No Error
     NoError             = ffi::SF_ERR_NO_ERROR as i32,
@@ -149,7 +149,7 @@ pub enum Error {
 
 
 /// Enum to set the offset with method seek
-#[deriving(Clone, Eq, Ord, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum SeekMode {
     /// The offset is set to the start of the audio data plus offset (multichannel) frames.
     SeekSet = ffi::SEEK_SET as i32,
@@ -160,7 +160,7 @@ pub enum SeekMode {
 }
 
 /// Enum who contains the list of the supported audio format
-#[deriving(Clone, Eq, Ord, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum FormatType {
     /// Microsoft WAV format (little endian)
     FormatWav = ffi::SF_FORMAT_WAV as i32,
@@ -298,7 +298,7 @@ impl SndFile {
      * Return Ok() containing the SndFile on success, a string representation
      * of the error otherwise.
      */
-    pub fn new(path : &str, mode : OpenMode) -> Result<SndFile, ~str> {
+    pub fn new(path : &str, mode : OpenMode) -> Result<SndFile, String> {
         let info : SndInfo = SndInfo {
             frames : 0,
             samplerate : 0,
@@ -334,7 +334,7 @@ impl SndFile {
      */
     pub fn new_with_fd(fd : i32,
                        mode : OpenMode,
-                       close_desc : bool) -> Result<SndFile, ~str> {
+                       close_desc : bool) -> Result<SndFile, String> {
         let info : SndInfo = SndInfo {
             frames : 0,
             samplerate : 0,
@@ -374,7 +374,7 @@ impl SndFile {
      *
      * Return Some() ~str if the tag is found, None otherwise.
      */
-    pub fn get_string(&self, string_type : StringSoundType) -> Option<~str> {
+    pub fn get_string(&self, string_type : StringSoundType) -> Option<String> {
         let c_string = unsafe {
             ffi::sf_get_string(self.handle, string_type as i32)
         };
@@ -750,7 +750,7 @@ impl SndFile {
      *
      * Return an owned str containing the last error.
      */
-    pub fn string_error(&self) -> ~str {
+    pub fn string_error(&self) -> String {
         unsafe {
             str::raw::from_c_str(ffi::sf_strerror(self.handle))
         }
@@ -761,7 +761,7 @@ impl SndFile {
      *
      * Return an owned str containing the error.
      */
-    pub fn error_number(error_num : Error) -> ~str {
+    pub fn error_number(error_num : Error) -> String {
         unsafe {
             str::raw::from_c_str(ffi::sf_error_number(error_num as i32))
         }
