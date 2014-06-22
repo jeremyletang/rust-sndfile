@@ -1,4 +1,4 @@
-rust-sndfile [![Build Status](https://travis-ci.org/JeremyLetang/rust-sndfile.png?branch=master)](https://travis-ci.org/JeremyLetang/rust-sndfile)
+rust-sndfile [![Build Status](https://travis-ci.org/jeremyletang/rust-sndfile.png?branch=master)](https://travis-ci.org/JeremyLetang/rust-sndfile)
 ============
 
 __Libsndfile__ bindings and wrappers for Rust.
