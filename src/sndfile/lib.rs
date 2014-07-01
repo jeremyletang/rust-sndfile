@@ -99,36 +99,36 @@ pub struct SndInfo {
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum OpenMode {
     /// Read only mode
-    Read    = ffi::SFM_READ as i32,
+    Read    = ffi::SFM_READ as int,
     /// Write only mode
-    Write   = ffi::SFM_WRITE as i32,
+    Write   = ffi::SFM_WRITE as int,
     /// Read and Write mode
-    ReadWrite    = ffi::SFM_RDWR as i32
+    ReadWrite    = ffi::SFM_RDWR as int
 }
 
 /// Type of strings available for method get_string()
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum StringSoundType {
     /// Get the title of the audio content
-    Title       = ffi::SF_STR_TITLE as i32,
+    Title       = ffi::SF_STR_TITLE as int,
     /// Get the copyright of the audio content
-    Copyright   = ffi::SF_STR_COPYRIGHT as i32,
+    Copyright   = ffi::SF_STR_COPYRIGHT as int,
     /// Get the software name used to create the audio content
-    Software    = ffi::SF_STR_SOFTWARE as i32,
+    Software    = ffi::SF_STR_SOFTWARE as int,
     /// Get the artist of the audio content
-    Artist      = ffi::SF_STR_ARTIST as i32,
+    Artist      = ffi::SF_STR_ARTIST as int,
     /// Get the comment on the audio file
-    Comment     = ffi::SF_STR_COMMENT as i32,
+    Comment     = ffi::SF_STR_COMMENT as int,
     /// Get the date of creation
-    Date        = ffi::SF_STR_DATE as i32,
+    Date        = ffi::SF_STR_DATE as int,
     /// The name of the album
-    Album       = ffi::SF_STR_ALBUM as i32,
+    Album       = ffi::SF_STR_ALBUM as int,
     /// The licence of the content
-    License     = ffi::SF_STR_LICENSE as i32,
+    License     = ffi::SF_STR_LICENSE as int,
     /// The track number of the audio content in an album
-    TrackNumber = ffi::SF_STR_TRACKNUMBER as i32,
+    TrackNumber = ffi::SF_STR_TRACKNUMBER as int,
     /// The genre of the audio content
-    Genre       = ffi::SF_STR_GENRE as i32
+    Genre       = ffi::SF_STR_GENRE as int
 }
 
 /// Types of error who can be return by API functions
@@ -136,15 +136,15 @@ pub enum StringSoundType {
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum Error {
     /// No Error
-    NoError             = ffi::SF_ERR_NO_ERROR as i32,
+    NoError             = ffi::SF_ERR_NO_ERROR as int,
     /// The file format is not recognized
-    UnrecognizedFormat  = ffi::SF_ERR_UNRECOGNISED_FORMAT as i32,
+    UnrecognizedFormat  = ffi::SF_ERR_UNRECOGNISED_FORMAT as int,
     /// There is an internal system error
-    SystemError         = ffi::SF_ERR_SYSTEM as i32,
+    SystemError         = ffi::SF_ERR_SYSTEM as int,
     /// The file is malformed
-    MalformedFile       = ffi::SF_ERR_MALFORMED_FILE as i32,
+    MalformedFile       = ffi::SF_ERR_MALFORMED_FILE as int,
     /// The encoding of the file is not supported by sndfile
-    UnsupportedEncoding = ffi::SF_ERR_UNSUPPORTED_ENCODING as i32,
+    UnsupportedEncoding = ffi::SF_ERR_UNSUPPORTED_ENCODING as int,
 }
 
 
@@ -152,129 +152,129 @@ pub enum Error {
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum SeekMode {
     /// The offset is set to the start of the audio data plus offset (multichannel) frames.
-    SeekSet = ffi::SEEK_SET as i32,
+    SeekSet = ffi::SEEK_SET as int,
     /// The offset is set to its current location plus offset (multichannel) frames.
-    SeekCur = ffi::SEEK_CUR as i32,
+    SeekCur = ffi::SEEK_CUR as int,
     /// The offset is set to the end of the data plus offset (multichannel) frames.
-    SeekEnd = ffi::SEEK_END as i32
+    SeekEnd = ffi::SEEK_END as int
 }
 
 /// Enum who contains the list of the supported audio format
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
 pub enum FormatType {
     /// Microsoft WAV format (little endian)
-    FormatWav = ffi::SF_FORMAT_WAV as i32,
+    FormatWav = ffi::SF_FORMAT_WAV as int,
     /// Apple/SGI AIFF format (big endian)
-    FormatAiff = ffi::SF_FORMAT_AIFF as i32,
+    FormatAiff = ffi::SF_FORMAT_AIFF as int,
     /// Sun/NeXT AU format (big endian)
-    FormatAu = ffi::SF_FORMAT_AU as i32,
+    FormatAu = ffi::SF_FORMAT_AU as int,
     /// RAW PCM data
-    FormatRaw = ffi::SF_FORMAT_RAW as i32,
+    FormatRaw = ffi::SF_FORMAT_RAW as int,
     /// Ensoniq PARIS file format
-    FormatPaf = ffi::SF_FORMAT_PAF as i32,
+    FormatPaf = ffi::SF_FORMAT_PAF as int,
     /// Amiga IFF / SVX8 / SV16 format
-    FormatSvx = ffi::SF_FORMAT_SVX as i32,
+    FormatSvx = ffi::SF_FORMAT_SVX as int,
     /// Sphere NIST format
-    FormatNist = ffi::SF_FORMAT_NIST as i32,
+    FormatNist = ffi::SF_FORMAT_NIST as int,
     /// VOC files
-    FormatVoc = ffi::SF_FORMAT_VOC as i32,
+    FormatVoc = ffi::SF_FORMAT_VOC as int,
     /// Berkeley/IRCAM/CARL
-    FormatIrcam = ffi::SF_FORMAT_IRCAM as i32,
+    FormatIrcam = ffi::SF_FORMAT_IRCAM as int,
     /// Sonic Foundry's 64 bit RIFF/WAV
-    FormatW64 = ffi::SF_FORMAT_W64 as i32,
+    FormatW64 = ffi::SF_FORMAT_W64 as int,
     /// Matlab (tm) V4.2 / GNU Octave 2.0
-    FormatMat4 = ffi::SF_FORMAT_MAT4 as i32,
+    FormatMat4 = ffi::SF_FORMAT_MAT4 as int,
     /// Matlab (tm) V5.0 / GNU Octave 2.1
-    FormatMat5 = ffi::SF_FORMAT_MAT5 as i32,
+    FormatMat5 = ffi::SF_FORMAT_MAT5 as int,
     /// Portable Voice Format
-    FormatPvf = ffi::SF_FORMAT_PVF as i32,
+    FormatPvf = ffi::SF_FORMAT_PVF as int,
     /// Fasttracker 2 Extended Instrument
-    FormatXi = ffi::SF_FORMAT_XI as i32,
+    FormatXi = ffi::SF_FORMAT_XI as int,
     /// HMM Tool Kit format
-    FormatHtk = ffi::SF_FORMAT_HTK as i32,
+    FormatHtk = ffi::SF_FORMAT_HTK as int,
     /// Midi Sample Dump Standard
-    FormatSds = ffi::SF_FORMAT_SDS as i32,
+    FormatSds = ffi::SF_FORMAT_SDS as int,
     /// Audio Visual Research
-    FormatAvr = ffi::SF_FORMAT_AVR as i32,
+    FormatAvr = ffi::SF_FORMAT_AVR as int,
     /// MS WAVE with WAVEFORMATEX
-    FormatWavex = ffi::SF_FORMAT_WAVEX as i32,
+    FormatWavex = ffi::SF_FORMAT_WAVEX as int,
     /// Sound Designer 2
-    FormatSd2 = ffi::SF_FORMAT_SD2 as i32,
+    FormatSd2 = ffi::SF_FORMAT_SD2 as int,
     /// FLAC lossless file format
-    FormatFlac = ffi::SF_FORMAT_FLAC as i32,
+    FormatFlac = ffi::SF_FORMAT_FLAC as int,
     /// Core Audio File format
-    FormatCaf = ffi::SF_FORMAT_CAF as i32,
+    FormatCaf = ffi::SF_FORMAT_CAF as int,
     /// Psion WVE format
-    FormatWve = ffi::SF_FORMAT_WVE as i32,
+    FormatWve = ffi::SF_FORMAT_WVE as int,
     /// Xiph OGG container
-    FormatOgg = ffi::SF_FORMAT_OGG as i32,
+    FormatOgg = ffi::SF_FORMAT_OGG as int,
     /// Akai MPC 2000 sampler
-    FormatMpc2k = ffi::SF_FORMAT_MPC2K as i32,
+    FormatMpc2k = ffi::SF_FORMAT_MPC2K as int,
     /// RF64 WAV file
-    FormatRf64 = ffi::SF_FORMAT_RF64 as i32,
+    FormatRf64 = ffi::SF_FORMAT_RF64 as int,
     /// Signed 8 bit data
-    FormatPcmS8 = ffi::SF_FORMAT_PCM_S8 as i32,
+    FormatPcmS8 = ffi::SF_FORMAT_PCM_S8 as int,
     /// Signed 16 bit data
-    FormatPcm16 = ffi::SF_FORMAT_PCM_16 as i32,
+    FormatPcm16 = ffi::SF_FORMAT_PCM_16 as int,
     /// Signed 24 bit data
-    FormatPcm24 = ffi::SF_FORMAT_PCM_24 as i32,
+    FormatPcm24 = ffi::SF_FORMAT_PCM_24 as int,
     /// Signed 32 bit data
-    FormatPcm32 = ffi::SF_FORMAT_PCM_32 as i32,
+    FormatPcm32 = ffi::SF_FORMAT_PCM_32 as int,
     /// Unsigned 8 bit data (WAV and RAW only)
-    FormatPcmU8 = ffi::SF_FORMAT_PCM_U8 as i32,
+    FormatPcmU8 = ffi::SF_FORMAT_PCM_U8 as int,
     /// 32 bit float data
-    FormatFloat = ffi::SF_FORMAT_FLOAT as i32,
+    FormatFloat = ffi::SF_FORMAT_FLOAT as int,
     /// 64 bit float data
-    FormatDouble = ffi::SF_FORMAT_DOUBLE as i32,
+    FormatDouble = ffi::SF_FORMAT_DOUBLE as int,
     /// U-Law encoded
-    FormatUlaw = ffi::SF_FORMAT_ULAW as i32,
+    FormatUlaw = ffi::SF_FORMAT_ULAW as int,
     /// A-Law encoded
-    FormatAlaw = ffi::SF_FORMAT_ALAW as i32,
+    FormatAlaw = ffi::SF_FORMAT_ALAW as int,
     /// IMA ADPCM
-    FormatImaAdpcm = ffi::SF_FORMAT_IMA_ADPCM as i32,
+    FormatImaAdpcm = ffi::SF_FORMAT_IMA_ADPCM as int,
     /// Microsoft ADPCM
-    FormatApcm = ffi::SF_FORMAT_MS_ADPCM  as i32,
+    FormatApcm = ffi::SF_FORMAT_MS_ADPCM  as int,
     /// GSM 6.10 encoding
-    FormatGsm610 = ffi::SF_FORMAT_GSM610 as i32,
+    FormatGsm610 = ffi::SF_FORMAT_GSM610 as int,
     /// Oki Dialogic ADPCM encoding
-    FormatVoxAdpcm = ffi::SF_FORMAT_VOX_ADPCM as i32,
+    FormatVoxAdpcm = ffi::SF_FORMAT_VOX_ADPCM as int,
     /// 32kbs G721 ADPCM encoding
-    FormatG72132 = ffi::SF_FORMAT_G721_32 as i32,
+    FormatG72132 = ffi::SF_FORMAT_G721_32 as int,
     /// 24kbs G723 ADPCM encoding
-    FormatG72324 = ffi::SF_FORMAT_G723_24 as i32,
+    FormatG72324 = ffi::SF_FORMAT_G723_24 as int,
     /// 40kbs G723 ADPCM encoding
-    FormatG72340 = ffi::SF_FORMAT_G723_40 as i32,
+    FormatG72340 = ffi::SF_FORMAT_G723_40 as int,
     /// 12 bit Delta Width Variable Word encoding
-    FormatDww12 = ffi::SF_FORMAT_DWVW_12 as i32,
+    FormatDww12 = ffi::SF_FORMAT_DWVW_12 as int,
     /// 16 bit Delta Width Variable Word encoding
-    FormatDww16 = ffi::SF_FORMAT_DWVW_16 as i32,
+    FormatDww16 = ffi::SF_FORMAT_DWVW_16 as int,
     /// 24 bit Delta Width Variable Word encoding
-    FormatDww24 = ffi::SF_FORMAT_DWVW_24 as i32,
+    FormatDww24 = ffi::SF_FORMAT_DWVW_24 as int,
     /// N bit Delta Width Variable Word encoding
-    FormatDwwN = ffi::SF_FORMAT_DWVW_N as i32,
+    FormatDwwN = ffi::SF_FORMAT_DWVW_N as int,
     /// 8 bit differential PCM (XI only)
-    FormatDpcm8 = ffi::SF_FORMAT_DPCM_8 as i32,
+    FormatDpcm8 = ffi::SF_FORMAT_DPCM_8 as int,
     /// 16 bit differential PCM (XI only)
-    FormatDpcm16 = ffi::SF_FORMAT_DPCM_16 as i32,
+    FormatDpcm16 = ffi::SF_FORMAT_DPCM_16 as int,
     /// Xiph Vorbis encoding
-    FormatVorbis = ffi::SF_FORMAT_VORBIS as i32,
+    FormatVorbis = ffi::SF_FORMAT_VORBIS as int,
     /// Default file endian-ness
-    EndianFile = ffi::SF_ENDIAN_FILE as i32,
+    EndianFile = ffi::SF_ENDIAN_FILE as int,
     /// Force little endian-ness
-    EndianLittle = ffi::SF_ENDIAN_LITTLE as i32,
+    EndianLittle = ffi::SF_ENDIAN_LITTLE as int,
     /// Force big endian-ness
-    EndianBig = ffi::SF_ENDIAN_BIG as i32,
+    EndianBig = ffi::SF_ENDIAN_BIG as int,
     /// Force CPU endian-ness
-    EndianCpu = ffi::SF_ENDIAN_CPU as i32,
+    EndianCpu = ffi::SF_ENDIAN_CPU as int,
     /// Sub mask
-    FormatSubMask = ffi::SF_FORMAT_SUBMASK as i32,
+    FormatSubMask = ffi::SF_FORMAT_SUBMASK as int,
     /// Type mask
-    FormatTypeMask = ffi::SF_FORMAT_TYPEMASK as i32,
+    FormatTypeMask = ffi::SF_FORMAT_TYPEMASK as int,
 }
 
 /// SndFile object, used to load/store sound from a file path or an fd.
 pub struct SndFile {
-    handle : *ffi::SNDFILE,
+    handle : *mut ffi::SNDFILE,
     info : SndInfo
 }
 
@@ -311,7 +311,7 @@ impl SndFile {
                 unsafe {ffi::sf_open(c_path, mode as i32, &info) }
             });
         if tmp_sndfile.is_null() {
-            Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::null())) })
+            Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::mut_null())) })
         } else {
             Ok(SndFile {
                     handle :    tmp_sndfile,
@@ -352,7 +352,7 @@ impl SndFile {
             }
         };
         if tmp_sndfile.is_null() {
-            Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::null())) })
+            Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::mut_null())) })
         } else {
             Ok(SndFile {
                 handle :    tmp_sndfile,
