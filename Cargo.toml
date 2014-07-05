@@ -1,0 +1,10 @@
+[package]
+
+name = "sndfile"
+version = "0.0.1"
+authors = ["Jeremy Letang <letang.jeremy@gmail.com>"]
+
+[[lib]]
+
+name = "sndfile"
+crate-type = ["dylib", "rlib"]

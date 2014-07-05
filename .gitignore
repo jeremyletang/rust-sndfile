@@ -1,7 +1,3 @@
 /doc/
-/lib/
-/bin/
+target
 *.dylib
-/.rust
-/build/
-/.DS_Store
