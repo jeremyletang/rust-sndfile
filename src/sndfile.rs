@@ -54,7 +54,7 @@ rustpkg build sndfile
 
 #![feature(globs)]
 
-#![crate_id = "sndfile#0.1"]
+#![crate_name = "sndfile"]
 #![desc = "Libsndfile binding for sfml"]
 #![license = "GPL/LGPL"]
 #![crate_type = "rlib"]
