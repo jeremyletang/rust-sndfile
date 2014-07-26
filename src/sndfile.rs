@@ -64,7 +64,7 @@ rustpkg build sndfile
 
 extern crate libc;
 
-use std::{str, ptr};
+use std::{string, ptr};
 
 #[doc(hidden)]
 #[cfg(target_os="macos")]
@@ -311,7 +311,7 @@ impl SndFile {
                 unsafe {ffi::sf_open(c_path, mode as i32, &info) }
             });
         if tmp_sndfile.is_null() {
-            Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::mut_null())) })
+            Err(unsafe { string::raw::from_buf(ffi::sf_strerror(ptr::mut_null()) as *const u8) })
         } else {
             Ok(SndFile {
                     handle :    tmp_sndfile,
@@ -352,7 +352,7 @@ impl SndFile {
             }
         };
         if tmp_sndfile.is_null() {
-            Err(unsafe { str::raw::from_c_str(ffi::sf_strerror(ptr::mut_null())) })
+            Err(unsafe { string::raw::from_buf(ffi::sf_strerror(ptr::mut_null()) as *const u8) })
         } else {
             Ok(SndFile {
                 handle :    tmp_sndfile,
@@ -381,7 +381,7 @@ impl SndFile {
         if c_string.is_null() {
             None
         } else {
-            Some(unsafe { str::raw::from_c_str(c_string) })
+            Some(unsafe { string::raw::from_buf(c_string as *const u8) })
         }
     }
 
@@ -752,7 +752,7 @@ impl SndFile {
      */
     pub fn string_error(&self) -> String {
         unsafe {
-            str::raw::from_c_str(ffi::sf_strerror(self.handle))
+            string::raw::from_buf(ffi::sf_strerror(self.handle) as *const u8)
         }
     }
 
@@ -763,7 +763,7 @@ impl SndFile {
      */
     pub fn error_number(error_num : Error) -> String {
         unsafe {
-            str::raw::from_c_str(ffi::sf_error_number(error_num as i32))
+            string::raw::from_buf(ffi::sf_error_number(error_num as i32) as *const u8)
         }
     }
 
