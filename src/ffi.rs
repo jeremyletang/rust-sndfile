@@ -133,16 +133,16 @@ extern "C" {
     pub fn sf_format_check(info : *const SndInfo) -> SF_BOOL;
 
     pub fn sf_seek(sndfile : *mut SNDFILE, frames : i64, whence : i32) -> i64;
-    pub fn sf_command(sndfile : *mut SNDFILE, cmd : i32, data : *mut c_void, datasize : i32) -> Error;
+    pub fn sf_command(sndfile : *mut SNDFILE, cmd : i32, data : *mut c_void, datasize : i32) -> SF_ERR;
 
-    pub fn sf_error(sndfile : *mut SNDFILE) -> Error;
+    pub fn sf_error(sndfile : *mut SNDFILE) -> SF_ERR;
     pub fn sf_strerror(sndfile : *mut SNDFILE) -> *const c_char;
     pub fn sf_error_number(errnum : i32) -> *const c_char;
 
-    pub fn sf_perror(sndfile : *mut SNDFILE) -> Error;
+    pub fn sf_perror(sndfile : *mut SNDFILE) -> SF_ERR;
     pub fn sf_error_str(sndfile : *mut SNDFILE, string : *const c_char, len : i64) ;
 
-    pub fn sf_close(sndfile : *mut SNDFILE) -> Error;
+    pub fn sf_close(sndfile : *mut SNDFILE) -> SF_ERR;
     pub fn sf_write_sync(sndfile : *mut SNDFILE) -> ();
 
     pub fn sf_read_short(sndfile : *mut SNDFILE, ptr : *mut i16, items : i64) -> i64;
@@ -169,6 +169,6 @@ extern "C" {
     pub fn sf_write_raw(sndfile : *mut SNDFILE, ptr : *mut c_void, bytes : i64) -> i64;
 
     pub fn sf_get_string(sndfile : *mut SNDFILE, str_type : i32) -> *const c_char;
-    pub fn sf_set_string(sndfile : *mut SNDFILE, str_type : i32, string : *const c_char) -> Error;
+    pub fn sf_set_string(sndfile : *mut SNDFILE, str_type : i32, string : *const c_char) -> SF_ERR;
 
 }
