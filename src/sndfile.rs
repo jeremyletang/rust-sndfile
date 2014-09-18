@@ -80,6 +80,7 @@ mod ffi;
 /// The SndInfo structure is for passing data between the calling
 /// function and the library when opening a file for reading or writing.
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
+#[repr(C)]
 pub struct SndInfo {
     /// The number of frames
     pub frames : i64,
@@ -132,21 +133,54 @@ pub enum StringSoundType {
 }
 
 /// Types of error who can be return by API functions
-#[repr(C)]
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
-pub enum Error {
-    /// No Error
-    NoError             = ffi::SF_ERR_NO_ERROR as int,
+pub enum SndFileError {
     /// The file format is not recognized
-    UnrecognizedFormat  = ffi::SF_ERR_UNRECOGNISED_FORMAT as int,
+    UnrecognisedFormat,
     /// There is an internal system error
-    SystemError         = ffi::SF_ERR_SYSTEM as int,
+    SystemError,
     /// The file is malformed
-    MalformedFile       = ffi::SF_ERR_MALFORMED_FILE as int,
+    MalformedFile,
     /// The encoding of the file is not supported by sndfile
-    UnsupportedEncoding = ffi::SF_ERR_UNSUPPORTED_ENCODING as int,
+    UnsupportedEncoding,
+    /// Any internal error code
+    InternalError(i32)
 }
 
+impl SndFileError {
+    /// Get a string representation of the error, as returned by libsndfile's
+    /// sf_error_number
+    pub fn desc(&self) -> String {
+        let error_code = match *self {
+            UnrecognisedFormat => ffi::SF_ERR_UNRECOGNISED_FORMAT,
+            SystemError => ffi::SF_ERR_SYSTEM,
+            MalformedFile => ffi::SF_ERR_MALFORMED_FILE,
+            UnsupportedEncoding => ffi::SF_ERR_UNSUPPORTED_ENCODING,
+            InternalError(err) => err
+        };
+        unsafe { string::raw::from_buf(ffi::sf_error_number(error_code) as *const u8) }
+    }
+
+    fn from_code(code: i32) -> Option<SndFileError> {
+        match code {
+            ffi::SF_ERR_NO_ERROR => None,
+            ffi::SF_ERR_UNRECOGNISED_FORMAT => Some(UnrecognisedFormat),
+            ffi::SF_ERR_SYSTEM => Some(SystemError),
+            ffi::SF_ERR_MALFORMED_FILE => Some(MalformedFile),
+            ffi::SF_ERR_UNSUPPORTED_ENCODING => Some(UnsupportedEncoding),
+            _ => Some(InternalError(code))
+        }
+    }
+
+    fn code_to_result<T>(code: i32, ok: T) -> SndFileResult<T> {
+        match SndFileError::from_code(code) {
+            Some(err) => Err(err),
+            None => Ok(ok)
+        }
+    }
+}
+
+pub type SndFileResult<T> = Result<T, SndFileError>;
 
 /// Enum to set the offset with method seek
 #[deriving(Clone, PartialEq, PartialOrd, Show)]
@@ -298,7 +332,7 @@ impl SndFile {
      * Return Ok() containing the SndFile on success, a string representation
      * of the error otherwise.
      */
-    pub fn new(path : &str, mode : OpenMode) -> Result<SndFile, String> {
+    pub fn new(path : &str, mode : OpenMode) -> SndFileResult<SndFile> {
         let info : SndInfo = SndInfo {
             frames : 0,
             samplerate : 0,
@@ -311,7 +345,8 @@ impl SndFile {
                 unsafe {ffi::sf_open(c_path, mode as i32, &info) }
             });
         if tmp_sndfile.is_null() {
-            Err(unsafe { string::raw::from_buf(ffi::sf_strerror(ptr::mut_null()) as *const u8) })
+            Err(SndFileError::from_code(unsafe { ffi::sf_error(ptr::mut_null())})
+                .expect("expected error from sf_error, got no error"))
         } else {
             Ok(SndFile {
                     handle :    tmp_sndfile,
@@ -334,7 +369,7 @@ impl SndFile {
      */
     pub fn new_with_fd(fd : i32,
                        mode : OpenMode,
-                       close_desc : bool) -> Result<SndFile, String> {
+                       close_desc : bool) -> SndFileResult<SndFile> {
         let info : SndInfo = SndInfo {
             frames : 0,
             samplerate : 0,
@@ -352,7 +387,9 @@ impl SndFile {
             }
         };
         if tmp_sndfile.is_null() {
-            Err(unsafe { string::raw::from_buf(ffi::sf_strerror(ptr::mut_null()) as *const u8) })
+            Err(SndFileError::from_code(unsafe {
+                ffi::sf_error(ptr::mut_null())
+            }).expect("expected error from sf_error, got no error"))
         } else {
             Ok(SndFile {
                 handle :    tmp_sndfile,
@@ -372,7 +409,7 @@ impl SndFile {
      * # Argument
      * * `string_type` - The type of the tag to retrieve
      *
-     * Return Some() ~str if the tag is found, None otherwise.
+     * Return Some(String) if the tag is found, None otherwise.
      */
     pub fn get_string(&self, string_type : StringSoundType) -> Option<String> {
         let c_string = unsafe {
@@ -392,16 +429,17 @@ impl SndFile {
      * * `string_type` - The type of the tag to set
      * * `string` - The string to set.
      *
-     * Return NoError on success, an other error code otherwise
+     * Return () on success, Err otherwise
      */
     pub fn set_string(&mut self,
                       string_type : StringSoundType,
-                      string : &str) -> Error {
-        unsafe {
+                      string : &str) -> SndFileResult<()> {
+        let error_code = unsafe {
             string.with_c_str(|c_str| {
                 ffi::sf_set_string(self.handle, string_type as i32, c_str)
             })
-        }
+        };
+        SndFileError::code_to_result(error_code, ())
     }
 
     /**
@@ -429,10 +467,9 @@ impl SndFile {
      *
      * Return NoError if destruction success, an other error code otherwise.
      */
-    pub fn close(&self) -> Error {
-        unsafe {
-            ffi::sf_close(self.handle)
-        }
+    pub fn close(&self) -> SndFileResult<()> {
+        let error_code = unsafe { ffi::sf_close(self.handle) };
+        SndFileError::code_to_result(error_code, ())
     }
 
     /**
@@ -441,7 +478,7 @@ impl SndFile {
      * If the file is opened Read no action is taken.
      * If the file is opened Read no action is taken.
      */
-    pub fn write_sync(&mut self) -> () {
+    pub fn write_sync(&mut self) {
         unsafe {
             ffi::sf_write_sync(self.handle)
         }
@@ -735,37 +772,13 @@ impl SndFile {
     }
 
     /**
-     * Get the last error
-     *
-     * Return the last error as a variant of the enum Error.
+     * Get the last error if one exists or `None` if there has not been an
+     * error.
      */
-    pub fn error(&self) -> Error {
-        unsafe {
+    pub fn error(&self) -> Option<SndFileError> {
+        SndFileError::from_code(unsafe {
             ffi::sf_error(self.handle)
-        }
+        })
     }
-
-    /**
-     * Get the last error as a string
-     *
-     * Return an owned str containing the last error.
-     */
-    pub fn string_error(&self) -> String {
-        unsafe {
-            string::raw::from_buf(ffi::sf_strerror(self.handle) as *const u8)
-        }
-    }
-
-    /**
-     * Get an error as a string from a variant of enum Error
-     *
-     * Return an owned str containing the error.
-     */
-    pub fn error_number(error_num : Error) -> String {
-        unsafe {
-            string::raw::from_buf(ffi::sf_error_number(error_num as i32) as *const u8)
-        }
-    }
-
 }
 
