@@ -67,9 +67,13 @@ extern crate libc;
 use std::{string, ptr};
 
 #[doc(hidden)]
-#[cfg(any(target_os="macos", target_os="linux", target_os="windows"))]
 mod libsndfile {
+    #[cfg(any(target_os="macos", target_os="linux", target_os="windows"))]
     #[link(name = "sndfile")]
+    extern {}
+
+    #[cfg(windows)]
+    #[link(name = "sndfile-1")]
     extern {}
 }
 
