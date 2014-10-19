@@ -2,12 +2,9 @@ notifications:
   email:
     - letang.jeremy@gmail.com
 before_install:
-  - yes | sudo add-apt-repository ppa:hansjorg/rust
-  - yes | sudo add-apt-repository ppa:cmrx64/cargo
   - sudo apt-get update
 install:
-  - sudo apt-get install cargo
-  - sudo apt-get install rust-nightly
+  - curl http://static.rust-lang.org/rustup.sh | sudo sh -
   - sudo apt-get install libsndfile1-dev
 env:
   - RUST_TEST_TASKS=1
