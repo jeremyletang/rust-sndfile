@@ -67,11 +67,13 @@ extern crate libc;
 use std::{string, ptr};
 
 #[doc(hidden)]
-#[cfg(target_os="macos")]
-#[cfg(target_os="linux")]
-#[cfg(target_os="win32")]
 mod libsndfile {
+    #[cfg(any(target_os="macos", target_os="linux"))]
     #[link(name = "sndfile")]
+    extern {}
+
+    #[cfg(windows)]
+    #[link(name = "sndfile-1")]
     extern {}
 }
 
@@ -345,7 +347,7 @@ impl SndFile {
                 unsafe {ffi::sf_open(c_path, mode as i32, &info) }
             });
         if tmp_sndfile.is_null() {
-            Err(SndFileError::from_code(unsafe { ffi::sf_error(ptr::mut_null())})
+            Err(SndFileError::from_code(unsafe { ffi::sf_error(ptr::null_mut())})
                 .expect("expected error from sf_error, got no error"))
         } else {
             Ok(SndFile {
@@ -388,7 +390,7 @@ impl SndFile {
         };
         if tmp_sndfile.is_null() {
             Err(SndFileError::from_code(unsafe {
-                ffi::sf_error(ptr::mut_null())
+                ffi::sf_error(ptr::null_mut())
             }).expect("expected error from sf_error, got no error"))
         } else {
             Ok(SndFile {

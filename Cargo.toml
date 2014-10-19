@@ -7,4 +7,3 @@ authors = ["Jeremy Letang <letang.jeremy@gmail.com>"]
 [[lib]]
 
 name = "sndfile"
-crate-type = ["dylib", "rlib"]
