@@ -59,7 +59,7 @@ rustpkg build sndfile
 #![license = "GPL/LGPL"]
 #![crate_type = "rlib"]
 #![crate_type = "dylib"]
-#![warn(missing_doc)]
+#![warn(missing_docs)]
 #![allow(dead_code)]
 
 extern crate libc;
@@ -154,11 +154,11 @@ impl SndFileError {
     /// sf_error_number
     pub fn desc(&self) -> String {
         let error_code = match *self {
-            UnrecognisedFormat => ffi::SF_ERR_UNRECOGNISED_FORMAT,
-            SystemError => ffi::SF_ERR_SYSTEM,
-            MalformedFile => ffi::SF_ERR_MALFORMED_FILE,
-            UnsupportedEncoding => ffi::SF_ERR_UNSUPPORTED_ENCODING,
-            InternalError(err) => err
+            SndFileError::UnrecognisedFormat => ffi::SF_ERR_UNRECOGNISED_FORMAT,
+            SndFileError::SystemError => ffi::SF_ERR_SYSTEM,
+            SndFileError::MalformedFile => ffi::SF_ERR_MALFORMED_FILE,
+            SndFileError::UnsupportedEncoding => ffi::SF_ERR_UNSUPPORTED_ENCODING,
+            SndFileError::InternalError(err) => err
         };
         unsafe { string::raw::from_buf(ffi::sf_error_number(error_code) as *const u8) }
     }
@@ -166,11 +166,11 @@ impl SndFileError {
     fn from_code(code: i32) -> Option<SndFileError> {
         match code {
             ffi::SF_ERR_NO_ERROR => None,
-            ffi::SF_ERR_UNRECOGNISED_FORMAT => Some(UnrecognisedFormat),
-            ffi::SF_ERR_SYSTEM => Some(SystemError),
-            ffi::SF_ERR_MALFORMED_FILE => Some(MalformedFile),
-            ffi::SF_ERR_UNSUPPORTED_ENCODING => Some(UnsupportedEncoding),
-            _ => Some(InternalError(code))
+            ffi::SF_ERR_UNRECOGNISED_FORMAT => Some(SndFileError::UnrecognisedFormat),
+            ffi::SF_ERR_SYSTEM => Some(SndFileError::SystemError),
+            ffi::SF_ERR_MALFORMED_FILE => Some(SndFileError::MalformedFile),
+            ffi::SF_ERR_UNSUPPORTED_ENCODING => Some(SndFileError::UnsupportedEncoding),
+            _ => Some(SndFileError::InternalError(code))
         }
     }
 
