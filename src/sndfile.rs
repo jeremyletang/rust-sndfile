@@ -99,7 +99,7 @@ pub struct SndInfo {
 }
 
 /// Modes availables for the open function.
-#[deriving(Clone, PartialEq, PartialOrd, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show, Copy)]
 pub enum OpenMode {
     /// Read only mode
     Read    = ffi::SFM_READ as int,
@@ -110,7 +110,7 @@ pub enum OpenMode {
 }
 
 /// Type of strings available for method get_string()
-#[deriving(Clone, PartialEq, PartialOrd, Show)]
+#[deriving(Clone, PartialEq, PartialOrd, Show, Copy)]
 pub enum StringSoundType {
     /// Get the title of the audio content
     Title       = ffi::SF_STR_TITLE as int,
