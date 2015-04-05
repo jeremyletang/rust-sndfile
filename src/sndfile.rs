@@ -56,11 +56,11 @@ rustpkg build sndfile
 #![crate_type = "rlib"]
 #![crate_type = "dylib"]
 #![warn(missing_docs)]
-#![allow(dead_code, unstable)]
 
 extern crate libc;
 
 use std::ptr;
+use std::ffi::CStr;
 
 #[doc(hidden)]
 mod libsndfile {
@@ -77,7 +77,7 @@ mod ffi;
 
 /// The SndInfo structure is for passing data between the calling
 /// function and the library when opening a file for reading or writing.
-#[derive(Clone, PartialEq, PartialOrd, Show, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Debug, Copy)]
 #[repr(C)]
 pub struct SndInfo {
     /// The number of frames
@@ -95,7 +95,7 @@ pub struct SndInfo {
 }
 
 /// Modes availables for the open function.
-#[derive(Clone, PartialEq, PartialOrd, Show, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Debug, Copy)]
 pub enum OpenMode {
     /// Read only mode
     Read    = ffi::SFM_READ as isize,
@@ -106,7 +106,7 @@ pub enum OpenMode {
 }
 
 /// Type of strings available for method get_string()
-#[derive(Clone, PartialEq, PartialOrd, Show, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Debug, Copy)]
 pub enum StringSoundType {
     /// Get the title of the audio content
     Title       = ffi::SF_STR_TITLE as isize,
@@ -131,7 +131,7 @@ pub enum StringSoundType {
 }
 
 /// Types of error who can be return by API functions
-#[derive(Clone, PartialEq, PartialOrd, Show, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Debug, Copy)]
 pub enum SndFileError {
     /// The file format is not recognized
     UnrecognisedFormat,
@@ -157,8 +157,8 @@ impl SndFileError {
             SndFileError::InternalError(err) => err
         };
         unsafe {
-            std::str::from_utf8_unchecked(std::ffi::c_str_to_bytes(
-                &ffi::sf_error_number(error_code))).to_string()
+            std::str::from_utf8_unchecked(CStr::from_ptr(
+                ffi::sf_error_number(error_code)).to_bytes()).to_string()
         }
     }
 
@@ -185,7 +185,7 @@ impl SndFileError {
 pub type SndFileResult<T> = Result<T, SndFileError>;
 
 /// Enum to set the offset with method seek
-#[derive(Clone, PartialEq, PartialOrd, Show, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Debug, Copy)]
 pub enum SeekMode {
     /// The offset is set to the start of the audio data plus offset (multichannel) frames.
     SeekSet = ffi::SEEK_SET as isize,
@@ -196,7 +196,7 @@ pub enum SeekMode {
 }
 
 /// Enum who contains the list of the supported audio format
-#[derive(Clone, PartialEq, PartialOrd, Show, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Debug, Copy)]
 pub enum FormatType {
     /// Microsoft WAV format (little endian)
     FormatWav = ffi::SF_FORMAT_WAV as isize,
@@ -421,8 +421,8 @@ impl SndFile {
             None
         } else {
             Some(unsafe {
-                std::str::from_utf8_unchecked(std::ffi::c_str_to_bytes(
-                    &c_string)).to_string()
+                std::str::from_utf8_unchecked(CStr::from_ptr(
+                    c_string).to_bytes()).to_string()
             })
         }
     }

@@ -7,3 +7,6 @@ authors = ["Jeremy Letang <letang.jeremy@gmail.com>"]
 [lib]
 
 name = "sndfile"
+
+[dependencies]
+libc = "*"
