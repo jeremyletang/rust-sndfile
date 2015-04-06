@@ -82,7 +82,7 @@ mod ffi;
 
 /// The SndInfo structure is for passing data between the calling
 /// function and the library when opening a file for reading or writing.
-#[derive(Clone, PartialEq, PartialOrd, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Copy, Debug)]
 #[repr(C)]
 pub struct SndInfo {
     /// The number of frames
@@ -100,7 +100,7 @@ pub struct SndInfo {
 }
 
 /// Modes availables for the open function.
-#[derive(Clone, PartialEq, PartialOrd, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Copy, Debug)]
 pub enum OpenMode {
     /// Read only mode
     Read    = ffi::SFM_READ as isize,
@@ -111,7 +111,7 @@ pub enum OpenMode {
 }
 
 /// Type of strings available for method get_string()
-#[derive(Clone, PartialEq, PartialOrd, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Copy, Debug)]
 pub enum StringSoundType {
     /// Get the title of the audio content
     Title       = ffi::SF_STR_TITLE as isize,
@@ -136,7 +136,7 @@ pub enum StringSoundType {
 }
 
 /// Types of error who can be return by API functions
-#[derive(Clone, PartialEq, PartialOrd, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Copy, Debug)]
 pub enum SndFileError {
     /// The file format is not recognized
     UnrecognisedFormat,
@@ -189,7 +189,7 @@ impl SndFileError {
 pub type SndFileResult<T> = Result<T, SndFileError>;
 
 /// Enum to set the offset with method seek
-#[derive(Clone, PartialEq, PartialOrd, Copy)]
+#[derive(Clone, PartialEq, PartialOrd, Copy, Debug)]
 pub enum SeekMode {
     /// The offset is set to the start of the audio data plus offset (multichannel) frames.
     SeekSet = ffi::SEEK_SET as isize,
