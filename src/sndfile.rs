@@ -59,8 +59,9 @@ rustpkg build sndfile
 
 extern crate libc;
 
+use std::path::Path;
 use std::ptr;
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 
 #[doc(hidden)]
 mod libsndfile {
@@ -335,8 +336,8 @@ impl SndFile {
      * Return Ok() containing the SndFile on success, a string representation
      * of the error otherwise.
      */
-    pub fn new(path : &str, mode : OpenMode) -> SndFileResult<SndFile> {
-        let info : SndInfo = SndInfo {
+    pub fn new(path : &Path, mode : OpenMode) -> SndFileResult<SndFile> {
+        let mut info : SndInfo = SndInfo {
             frames : 0,
             samplerate : 0,
             channels : 0,
@@ -344,8 +345,9 @@ impl SndFile {
             sections : 0,
             seekable : 0
         };
-        let c_path = path.as_ptr() as *const i8;
-        let tmp_sndfile = unsafe {ffi::sf_open(c_path, mode as i32, &info) };
+        let c_path = path.to_str().unwrap().to_string();
+        let cstr = CString::new(c_path).unwrap().as_ptr();
+        let tmp_sndfile = unsafe {ffi::sf_open(cstr, mode as i32, &mut info as *mut SndInfo) };
         if tmp_sndfile.is_null() {
             Err(SndFileError::from_code(unsafe { ffi::sf_error(ptr::null_mut())})
                 .expect("expected error from sf_error, got no error"))
@@ -785,4 +787,3 @@ impl SndFile {
         })
     }
 }
-
