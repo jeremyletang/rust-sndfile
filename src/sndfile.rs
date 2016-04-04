@@ -310,6 +310,7 @@ pub enum FormatType {
 }
 
 /// SndFile object, used to load/store sound from a file path or an fd.
+#[derive(Debug)]
 #[allow(missing_copy_implementations)]
 pub struct SndFile {
     handle : *mut ffi::SNDFILE,
