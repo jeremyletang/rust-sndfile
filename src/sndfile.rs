@@ -318,6 +318,8 @@ pub struct SndFile {
     info : SndInfo
 }
 
+unsafe impl Send for SndFile {}
+
 impl Drop for SndFile {
     fn drop(&mut self) {
         self.close().unwrap();
