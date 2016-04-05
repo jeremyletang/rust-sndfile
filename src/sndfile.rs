@@ -62,6 +62,7 @@ extern crate libc;
 use std::path::Path;
 use std::ptr;
 use std::ffi::{CStr, CString};
+use std::ops::Drop;
 
 #[doc(hidden)]
 mod libsndfile {
@@ -317,12 +318,9 @@ pub struct SndFile {
     info : SndInfo
 }
 
-impl Clone for SndFile {
-    fn clone(&self) -> SndFile {
-        SndFile {
-            handle : self.handle,
-            info : self.info.clone()
-        }
+impl Drop for SndFile {
+    fn drop(&mut self) {
+        self.close().unwrap();
     }
 }
 
@@ -474,7 +472,7 @@ impl SndFile {
      *
      * Return NoError if destruction success, an other error code otherwise.
      */
-    pub fn close(&self) -> SndFileResult<()> {
+    fn close(&self) -> SndFileResult<()> {
         let error_code = unsafe { ffi::sf_close(self.handle) };
         SndFileError::code_to_result(error_code, ())
     }
