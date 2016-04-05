@@ -13,3 +13,11 @@ You must install __libsndfile__ to build the binding. You can download it direct
 or with your favorite package management tool.
 
 Then clone the __rust-sndfile__ repository and build it with make.
+
+# Fork Diff
+
+SndFile no longer implement Clone.
+
+SndFile impl Send.
+
+SndFile impl Drop and close method is private
